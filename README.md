@@ -2,17 +2,13 @@
 ### A user-customized BMR and fitness progress console application.
 ---
 ## Important Note:
-This application will not work immediate after cloning/ forking.
-You MUST first create a blank textfile titled `ProfilesDatabase.txt` and
-store it on your local repository's main directory.
+This application will not work immediately after cloning/ forking. You MUST first create a blank text document titled `ProfilesDatabase.txt` and store it on your local repository's main directory.
 
-This was done in an effort to protect the confidentiality of other users'
-sensitive data and will create a fresh database for users on each local machine.
+This was done in an effort to protect the confidentiality of other users' sensitive data and will create a fresh database for users on each local machine.
 
 ---
 
-Welcome to the Fitness Assistant GitHub, written by: <br>
-<i>Eric McDaniel</i>, in July 2018.
+Welcome to the Fitness Assistant GitHub, written by <i>Eric McDaniel</i>, in July 2018.
 
 I am a first year computer science student at the University of Wisconsin - Fox Valley. I am learning the fundamenals in Visual Basic.NET, Python, Java, and C++. This program was written to apply the skills learned in class into a real world context. I am aware that it may not be realistic and often crude or unsophisticated. But Live and Learn.
 
