@@ -14,7 +14,9 @@ public class Profile
 
   public void start()
   {
-    System.out.print("\n\t----------------\n\t| Profile Menu |\n\t----------------\n\n");
+    System.out.print("\n\t----------------\n\t| Profile Menu |\n\t----------------\n\nPlease select an option:\n\t1.) ");
+
+
 
   }
   private String getLastLogin()
@@ -33,7 +35,7 @@ public class Profile
   public String initialWelcomeMenu()
   {
     return ("---------------------------------\n\t Welcome, " + currentUser.getName() + "!\n---------------------------------\n\nIt's been "
-      + getLastLogin() + " since\nyou've last logged in.\n-----------------------\n");
+      + getLastLogin() + " since\nyou've last logged in.\n---------------------------------\n");
   }
 
 }
