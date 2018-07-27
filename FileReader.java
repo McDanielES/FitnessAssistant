@@ -12,6 +12,7 @@ public class FileReader extends File
   private int         userAge;
   private int         userHeightInches;
   private int         userWeight;
+  private double      userBMR;
   private int         userLifestyle;
   private String      userID;
   private String      userPassword;
@@ -37,6 +38,7 @@ public class FileReader extends File
       userAge          = Integer.parseInt(databaselineReader.nextLine());
       userHeightInches = Integer.parseInt(databaselineReader.nextLine());
       userWeight       = Integer.parseInt(databaselineReader.nextLine());
+      userBMR          = Double.parseDouble(databaselineReader.nextLine());
       userLifestyle    = Integer.parseInt(databaselineReader.nextLine());
       userID           = databaselineReader.nextLine();
       userPassword     = databaselineReader.nextLine();
@@ -50,7 +52,7 @@ public class FileReader extends File
       userDateJoined.setLastLogin(Long.parseLong(databaselineReader.nextLine()));
 
       // Instantiate objects of class UserAccount and append to arraylist
-      UserAccount completeUserRecord = new UserAccount(userFirstName, isMale, userAge, userHeightInches, userWeight, userLifestyle, userID, userPassword, userDateJoined);
+      UserAccount completeUserRecord = new UserAccount(userFirstName, isMale, userAge, userHeightInches, userWeight, userBMR, userLifestyle, userID, userPassword, userDateJoined);
       _UserCollection.add(completeUserRecord);
     }
     databaselineReader.close();
@@ -67,6 +69,7 @@ public class FileReader extends File
       updateWriter.println(UserCollection.get(i).getAge());
       updateWriter.println(UserCollection.get(i).getHeightInches());
       updateWriter.println(UserCollection.get(i).getWeight());
+      updateWriter.println(UserCollection.get(i).getBMR());
       updateWriter.println(UserCollection.get(i).getLifestyle());
       updateWriter.println(UserCollection.get(i).getUserID());
       updateWriter.println(UserCollection.get(i).getPassword());

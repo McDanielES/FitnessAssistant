@@ -155,6 +155,9 @@ public class FitnessAssistant
               }
             } while (!validUserWeight);
 
+            ////////////////////////////////////////////////////////////////FIX///////////////////////////////////////////
+            double userBMR = 0;
+
             // Determine user's lifestyle
             System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: Sedentary (little or no exercise)\n\t\tOption 2: Lightly active (light exercise/sports 1-3 days/week)" +
             "\n\t\tOption 3: Moderately active (moderate exercise/sports 3-5 days/week)\n\t\tOption 4: Very active (hard exercise/sports 6-7 days a week)" +
@@ -223,7 +226,7 @@ public class FitnessAssistant
 
             // Create object of class UserAccount, add it to the ArrayList, and method updateProfileDatabase writes the database file with new info.
             UserAccount newProfileCreate = new UserAccount(userFirstName, isMale, userAge, userHeightInches,
-            userWeight, userLifestyle, userID, userPassword, userDateJoined);
+            userWeight, userBMR, userLifestyle, userID, userPassword, userDateJoined);
             UserCollection.add(newProfileCreate);
             userDatabase.updateProfileDatabase();
 

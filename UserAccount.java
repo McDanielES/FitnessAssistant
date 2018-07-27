@@ -5,6 +5,7 @@ public class UserAccount
   private int        userAge;
   private int        userHeightInches;
   private int        userWeight;
+  private double     userBMR;
   private int        userLifestyle;
   private String     userID;
   private String     userPassword;
@@ -13,7 +14,7 @@ public class UserAccount
   UserAccount(){}
 
   UserAccount(String _userFirstName, String _isMale, int _userAge, int _userHeightInches,
-    int _userWeight, int _userLifestyle, String _userID, String _userPassword, DateRecord _userDateJoined)
+    int _userWeight, double _userBMR, int _userLifestyle, String _userID, String _userPassword, DateRecord _userDateJoined)
     {
       userFirstName    = _userFirstName;
       if (_isMale.equals("true"))
@@ -21,6 +22,7 @@ public class UserAccount
       userAge          = _userAge;
       userHeightInches = _userHeightInches;
       userWeight       = _userWeight;
+      userBMR          = _userBMR;
       userLifestyle    = _userLifestyle;
       userID           = _userID;
       userPassword     = _userPassword;
@@ -38,6 +40,7 @@ public class UserAccount
     return userHeightFeet + "\'" + userHeightInches + "\"";
   }
   public int    getWeight()    { return userWeight;    }
+  public double getBMR()       { return userBMR;       }
   public int    getLifestyle() { return userLifestyle; }
   public String getUserID()    { return userID;        }
   public String getPassword()  { return userPassword;  }
