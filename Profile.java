@@ -15,6 +15,7 @@ public class Profile
   public void start()
   {
     System.out.print("\n\t----------------\n\t| Profile Menu |\n\t----------------\n\nPlease select an option:\n\t1.) ");
+    System.out.println(currentUser.getName() + "\'s BMR: " + currentUser.getBMR());
 
 
 

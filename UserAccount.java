@@ -40,7 +40,6 @@ public class UserAccount
     return userHeightFeet + "\'" + userHeightInches + "\"";
   }
   public int    getWeight()    { return userWeight;    }
-  public double getBMR()       { return userBMR;       }
   public int    getLifestyle() { return userLifestyle; }
   public String getUserID()    { return userID;        }
   public String getPassword()  { return userPassword;  }
@@ -57,4 +56,16 @@ public class UserAccount
   }
 
   public void setLastLogin(long _lastLogin) { userDateJoined.setLastLogin(_lastLogin); }
+  private void calculateBMR()
+  {
+    if (isMale)
+      userBMR = 66 + (6.23 * userWeight) + (12.7 * userHeightInches) - (6.8 * userAge);
+    else
+      userBMR = 655 + (4.35 * userWeight) + (4.7 * userHeightInches) - (4.7 * userAge);
+  }
+  public double getBMR()
+  {
+    calculateBMR();
+    return userBMR;
+  }
 }

@@ -154,9 +154,7 @@ public class FitnessAssistant
                 System.out.print("\t\tInvalid input. Please try again.\n\tWhat is your weight? ");
               }
             } while (!validUserWeight);
-
-            ////////////////////////////////////////////////////////////////FIX///////////////////////////////////////////
-            double userBMR = 0;
+            double userBMR = -1;
 
             // Determine user's lifestyle
             System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: Sedentary (little or no exercise)\n\t\tOption 2: Lightly active (light exercise/sports 1-3 days/week)" +
@@ -311,7 +309,6 @@ public class FitnessAssistant
                       System.out.print("\t\t\tInvalid input. Please try again.\n\t\tInches above " + userHeightFeetRecovery + " feet? ");
                     }
                   } while (!validUserHeightRecovery);
-                  // System.out.print("\t-------------------------------\n");
                   System.out.print("\n");
                   userHeightInchesRecovery = (userHeightFeetRecovery * 12) + userHeightInchesRecovery;
                   int userArrayListIndex = FindHeightInDatabase(username, userHeightInchesRecovery, UserCollection);
