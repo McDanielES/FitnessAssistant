@@ -61,14 +61,14 @@ public class FitnessAssistant
               System.out.print("\tWhat gender are you? Type M/F: ");
               userGender = userInputTemp.next();
               if (!(userGender.charAt(0) == 'M' || userGender.charAt(0) == 'm' || userGender.charAt(0) == 'F' || userGender.charAt(0) == 'f'))
-              System.out.print("\t\t" + userGender + "? Sorry, please revise your input.\n");
+                System.out.print("\t\t" + userGender + "? Sorry, please revise your input.\n");
               else
-              validGender = true;
+                validGender = true;
               // If user entered M/m/F/f, then determin gender.
               if (userGender.charAt(0) == 'M' || userGender.charAt(0) == 'm')
-              isMale = "true";
+                isMale = "true";
               else
-              isMale = "false";
+                isMale = "false";
             }
 
             // Get users' age.
@@ -81,9 +81,9 @@ public class FitnessAssistant
               {
                 userAge = Integer.parseInt(userInputTemp.next());
                 if (userAge <= 2 || userAge > 120)
-                System.out.print("\t\tYou seriously aren't " + userAge + " years old. Let's try again.\n\tWhat is your age? ");
+                  System.out.print("\t\tYou seriously aren't " + userAge + " years old. Let's try again.\n\tWhat is your age? ");
                 else
-                validUserAge = true;
+                  validUserAge = true;
               }
               catch (NumberFormatException nfe)
               {
@@ -102,9 +102,9 @@ public class FitnessAssistant
               {
                 userHeightFeet = Integer.parseInt(userInputTemp.next());
                 if (userHeightFeet <= 2 || userHeightFeet > 12)
-                System.out.print("\t\t\tYou seriously aren't " + userHeightFeet + " feet \"tall\". Let's try again.\n\t\tYour height in feet? ");
+                  System.out.print("\t\t\tYou seriously aren't " + userHeightFeet + " feet \"tall\". Let's try again.\n\t\tYour height in feet? ");
                 else
-                validUserHeight = true;
+                  validUserHeight = true;
               }
               catch (NumberFormatException nfe)
               {
@@ -120,11 +120,11 @@ public class FitnessAssistant
               {
                 userHeightInches = Integer.parseInt(userInputTemp.next());
                 if (userHeightInches < 0)
-                System.out.print("\t\t\tYou seriously aren't " + userHeightInches + " inches \"tall\". Let's try again.\n\t\tInches above " + userHeightFeet + " feet? ");
+                  System.out.print("\t\t\tYou seriously aren't " + userHeightInches + " inches \"tall\". Let's try again.\n\t\tInches above " + userHeightFeet + " feet? ");
                 else if (userHeightInches >= 12)
-                System.out.print("\t\t\tWell, there are only 12 inches in a foot. Try again.\n\t\tInches above " + userHeightFeet + " feet? ");
+                  System.out.print("\t\t\tWell, there are only 12 inches in a foot. Try again.\n\t\tInches above " + userHeightFeet + " feet? ");
                 else
-                validUserHeight = true;
+                  validUserHeight = true;
               }
               catch (NumberFormatException nfe)
               {
@@ -145,9 +145,9 @@ public class FitnessAssistant
               {
                 userWeight = Integer.parseInt(userInputTemp.next());
                 if (userWeight < 40 || userWeight > 600)
-                System.out.print("\t\tYou seriously aren't " + userWeight + "lbs. Let's try again.\n\tWhat is your weight? ");
+                  System.out.print("\t\tYou seriously aren't " + userWeight + "lbs. Let's try again.\n\tWhat is your weight? ");
                 else
-                validUserWeight = true;
+                  validUserWeight = true;
               }
               catch (NumberFormatException nfe)
               {
@@ -158,8 +158,8 @@ public class FitnessAssistant
 
             // Determine user's lifestyle
             System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: Sedentary (little or no exercise)\n\t\tOption 2: Lightly active (light exercise/sports 1-3 days/week)" +
-            "\n\t\tOption 3: Moderately active (moderate exercise/sports 3-5 days/week)\n\t\tOption 4: Very active (hard exercise/sports 6-7 days a week)" +
-            "\n\t\tOption 5: Extra active (very hard exercise/sports & physical job or 2x training)\n\t\t---------------------------------------------------------------------\n\tLifestyle option (1-5): ");
+              "\n\t\tOption 3: Moderately active (moderate exercise/sports 3-5 days/week)\n\t\tOption 4: Very active (hard exercise/sports 6-7 days a week)" +
+              "\n\t\tOption 5: Extra active (very hard exercise/sports & physical job or 2x training)\n\t\t---------------------------------------------------------------------\n\tLifestyle option (1-5): ");
             boolean validLifestyleRange = false;
             int userLifestyle = 0;
             do
@@ -336,7 +336,7 @@ public class FitnessAssistant
               }
               if (userProfileIndex < 0)
               {
-                System.out.print("\nSorry, there is no profile with the username " + username + ".\nPlease confirm your spelling or type HELP to access Profile Recovery.\n");
+                System.out.print("\nSorry, there is no profile with the username " + username + ".\nPlease confirm your spelling or type HELP to access Profile Recovery.\n\n");
                 userContinue = continueProgram(userInput);
               }
               else
@@ -447,22 +447,28 @@ public class FitnessAssistant
     System.out.print("\t-------------------------------------------");
     if (userChoice.charAt(0) == 'Y' || userChoice.charAt(0) == 'y')
     {
-      System.out.print("\n\n-------------------------------------------\n\tBack to the Main Menu\n-------------------------------------------\n\n");
-      try
-      {
-        Thread.sleep(1500);
-      }
-      catch(InterruptedException ex)
-      {
-        Thread.currentThread().interrupt();
-      }
-      finally
-      {
-        clearScreen();
-        return true;
-      }
+      System.out.print("\n\n-------------------------------------------\n\tBack to the Main Menu");
+      timedClearScreen();
+      clearScreen();
+      return true;
+
     }
-    System.out.print("\n\nThank you for using The Fitness Assistant!\nWritten by Eric S McDaniel, July 2018.\n\n");
+    System.out.print("\n\nThank you for using The Fitness Assistant!\nWritten by Eric S McDaniel, July-August 2018.\n\n");
     return false;
   } // End boolean continueProgram()
+  public static void timedClearScreen()
+  {
+    try
+    {
+      for (int i = 0; i < 5; ++i)
+      {
+        System.out.print(".");
+        Thread.sleep(500);
+      }
+    }
+    catch(InterruptedException ex)
+    {
+      Thread.currentThread().interrupt();
+    }
+  }
 } // End class FitnessAssistant
