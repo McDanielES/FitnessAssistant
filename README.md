@@ -14,7 +14,7 @@ I am a first year computer science student at the University of Wisconsin - Fox 
 
 #### To Run The Application:
 + Make sure the `ProfilesDataBase.txt` was created and inserted in the repo's main directory.
-+ Install a Java compiler, such as `javac` in Linux to compile .java classs, if your distro does not come with one already. Install openjdk if `javac` is not available.
++ Install a Java compiler, such as `javac` in Linux to compile .java classes, if your distro does not come with one already. Install openjdk if `javac` is not available.
 + Compile the `FitnessAssistant.java` file which contains the <i>main</i> method. All of the necessary .class bytecode files will be automatically created.
 + Enter `java FitnessAssistant` to run the program.
 
@@ -26,5 +26,5 @@ You can recover your login credentials by entering `y` in the main menu because 
 
 ---
 
-#### Author Contact
-Should you find an error in the program and would like to contact me, you can use GitHub's `@McDanielES` tagging system to contact me. Alternatively, I am available at <i>McDanielES@gmail.com</i>. I would prefer GitHub's messaging system over my personal email.
+#### Contact the Author
+Should you find an error in the program or would like to contact me for suggestion/ improvements, you can use GitHub's `@McDanielES` mention system to contact me. I will try to respond as fast as I can.
