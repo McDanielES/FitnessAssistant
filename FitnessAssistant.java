@@ -11,7 +11,8 @@ public class FitnessAssistant
   public static void main(String[] args) throws FileNotFoundException
   {
     clearScreen();
-    FileReader userDatabase = new FileReader("ProfilesDatabase.txt");
+    String databaseFilename = "ProfilesDatabase.txt";
+    FileReader userDatabase = new FileReader(databaseFilename);
     if (!userDatabase.exists())
       System.out.print("Error: User Profiles could not be loaded. Please contact the developer to resolve this issue.\n");
     else
@@ -228,7 +229,7 @@ public class FitnessAssistant
             UserCollection.add(newProfileCreate);
             userDatabase.updateProfileDatabase();
 
-            System.out.print("Congratulations for being a member since " + newProfileCreate.getJoinedFillPrint()
+            System.out.print("Congratulations for being a member since " + newProfileCreate.getJoinedFullPrint()
               + "!\n\n\t________________________________________\n\tPlease return to the Main Menu to login.\n");
             userContinue = continueProgram(userInput);
           }
@@ -369,7 +370,7 @@ public class FitnessAssistant
 
                   // Collect last login before its overwritten, and create object to direct to Profile menu.
                   long lastLogin = UserCollection.get(userProfileIndex).getLastLogin();
-                  Profile currentUser = new Profile(UserCollection.get(userProfileIndex), userProfileIndex, lastLogin);
+                  Profile currentUser = new Profile(UserCollection.get(userProfileIndex), lastLogin, userDatabase);
 
                   // Reset last login, save to database, and present special "first time" Profile menu.
                   UserCollection.get(userProfileIndex).setLastLogin(System.currentTimeMillis());
@@ -412,6 +413,7 @@ public class FitnessAssistant
     }
     return false;
   } // End bolean FindNameInDatabase()
+
   public static boolean FindAgeInDatabase(String _userFirstName, int _userAge, ArrayList<UserAccount> _UserCollection)
   {
     for (int i = 0; i < _UserCollection.size(); ++i)
@@ -423,6 +425,7 @@ public class FitnessAssistant
     }
     return false;
   } // End boolean FindAgeInDatabase()
+
   public static int FindHeightInDatabase(String _userFirstName, int _userHeightInchesRecovery, ArrayList<UserAccount> _UserCollection)
   {
     for (int i = 0; i < _UserCollection.size(); ++i)
@@ -432,13 +435,13 @@ public class FitnessAssistant
     }
     return -1;
   } // end int FindHeightInDatabase()
+
   public static void clearScreen()
   {
     for (int i = 0; i < 75; ++i)
-    {
       System.out.println();
-    }
   } // End void clearScreen()
+
   public static boolean continueProgram(Scanner _userInput)
   {
     String userChoice = "";
@@ -451,11 +454,11 @@ public class FitnessAssistant
       timedClearScreen();
       clearScreen();
       return true;
-
     }
     System.out.print("\n\nThank you for using The Fitness Assistant!\nWritten by Eric S McDaniel, July-August 2018.\n\n");
     return false;
   } // End boolean continueProgram()
+
   public static void timedClearScreen()
   {
     try
@@ -470,5 +473,5 @@ public class FitnessAssistant
     {
       Thread.currentThread().interrupt();
     }
-  }
+  } // End void timedClearScreen()
 } // End class FitnessAssistant

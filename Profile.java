@@ -1,21 +1,22 @@
 import java.util.Scanner;
 import java.lang.NumberFormatException;
+import java.io.FileNotFoundException;
 
 public class Profile
 {
   private UserAccount currentUser;
-  private int         userIndex;
   private long        lastLogin;
+  private FileReader  userDatabase;
 
   Profile(){}
-  Profile(UserAccount _currentUser, int _userIndex, long _lastLogin)
+  Profile(UserAccount _currentUser, long _lastLogin, FileReader _userDatabase)
   {
-    currentUser = _currentUser;
-    userIndex   = _userIndex;
-    lastLogin   = _lastLogin;
+    currentUser  = _currentUser;
+    lastLogin    = _lastLogin;
+    userDatabase = _userDatabase;
   }
 
-  public void start()
+  public void start() throws FileNotFoundException
   {
     boolean continueProgram = true;
     Scanner userInput = new Scanner(System.in);
@@ -47,12 +48,12 @@ public class Profile
         do
         {
           FitnessAssistant.clearScreen();
-          int Menu2input = -1;
+          int updateProfileInput = -1;
           System.out.print("\n\t---------------\n\t| Update Menu |\n\t---------------\n\nWhat would you like to update?\n\n\t1.) Name\n\t2.) Age"
-          + "\n\t3.) Height\n\t4.) Lifestyle\n\n\t9.) None, Exit\n\n***Reminder: you can update your weight from the profile menu***\n\nSelection: ");
+          + "\n\t3.) Height\n\t4.) Lifestyle\n\n\t9.) Save and Exit\n\n***Reminder: you can update your weight from the profile menu***\n\nSelection: ");
           try
           {
-            Menu2input = Integer.parseInt(userInput.next());
+            updateProfileInput = Integer.parseInt(userInput.next());
           }
           catch (NumberFormatException nfe)
           {
@@ -60,18 +61,18 @@ public class Profile
           }
 
           // User selects "Update Name"
-          if (Menu2input == 1)
+          if (updateProfileInput == 1)
           {
             FitnessAssistant.clearScreen();
             System.out.print("\n\t---------------\n\t| Update Name |\n\t---------------\n\n");
-            System.out.print("\tCurrent profile name: " + currentUser.getName() + "\n\n\tUpdated profile name: ");
+            System.out.print("Current profile name: " + currentUser.getName() + "\n-------------------------------\n\tUpdated profile name: ");
             String newProfileName = userInput.next();
             System.out.print("\tConfirm updated name: ");
-            String newProfileNameConfirm = userInput.next();
-            if (newProfileName.equals(newProfileNameConfirm))
+            String newProfileNameConfirmed = userInput.next();
+            if (newProfileName.equals(newProfileNameConfirmed))
             {
-              System.out.print("\nSuccess. Name to be changed");
-              continueUpdateProfile = false;
+              currentUser.setName(newProfileName);
+              System.out.print("\n\nSuccess! Your profile name has been updated to: " + newProfileName + "\n\n----------------------------------------\nReturning to Profile Menu");
               FitnessAssistant.timedClearScreen();
             }
             else
@@ -82,23 +83,24 @@ public class Profile
 
           }
           // User selects "Update Age"
-          else if (Menu2input == 2)
+          else if (updateProfileInput == 2)
           {
 
           }
           // User selects "Update Height"
-          else if (Menu2input == 3)
+          else if (updateProfileInput == 3)
           {
 
           }
           // User selects "Update Lifestyle"
-          else if (Menu2input == 4)
+          else if (updateProfileInput == 4)
           {
 
           }
-          // User selects "Exit"
-          else if (Menu2input == 9)
+          // User selects "Save and Exit"
+          else if (updateProfileInput == 9)
           {
+            userDatabase.updateProfileDatabase();
             continueProgram = true;
             continueUpdateProfile = false;
           }
@@ -133,7 +135,7 @@ public class Profile
 
 
 
-  }
+  } // End void Start(), the main of the Profile class
 
   private String getLastLogin()
   {
@@ -147,11 +149,12 @@ public class Profile
       else
         return ((hoursSinceLastLogin / 24) + " days and " + (hoursSinceLastLogin % 24) + " hours");
     }
-  }
+  } // End String getLastLogin()
+
   public String initialWelcomeMenu()
   {
     return ("---------------------------------\n\t Welcome, " + currentUser.getName() + "!\n---------------------------------\n\nIt's been "
       + getLastLogin() + " since\nyou've last logged in.\n---------------------------------\n");
-  }
+  } // End initialWelcomeMenu()
 
 }
