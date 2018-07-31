@@ -16,11 +16,11 @@ public class DateRecord extends Date
   }
 
   public void setUserJoined()                 { userJoined = System.currentTimeMillis(); }
-  public void setDayOfWeek(String _dayOfWeek) { dayOfWeek = _dayOfWeek; }
-  public void setUserMonth(String _month)     { month = _month;         }
-  public void setUserDay(String _day)         { day = _day;             }
-  public void setUserYear(String _year)       { year = _year;           }
-  public void setLastLogin(long _lastLogin)   { lastLogin = _lastLogin; }
+  public void setDayOfWeek(String _dayOfWeek) { dayOfWeek  = _dayOfWeek; }
+  public void setUserMonth(String _month)     { month      = _month;     }
+  public void setUserDay(String _day)         { day        = _day;       }
+  public void setUserYear(String _year)       { year       = _year;      }
+  public void setLastLogin(long _lastLogin)   { lastLogin  = _lastLogin; }
 
   public long   getUserJoined() { return userJoined; }
   public String getDayOfWeek()  { return dayOfWeek;  }

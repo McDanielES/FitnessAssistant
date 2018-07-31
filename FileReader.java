@@ -6,23 +6,23 @@ import java.io.PrintWriter;
 
 public class FileReader extends File
 {
-  private String      filename;
-  private String      userFirstName;
-  private String      isMale = "false"; // Reads as String, will convert to boolean
-  private int         userAge;
-  private int         userHeightInches;
-  private int         userWeight;
-  private double      userBMR;
-  private int         userLifestyle;
-  private String      userID;
-  private String      userPassword;
-  private DateRecord  userDateJoined;
+  private String     filename;
+  private String     userFirstName;
+  private String     isMale = "false"; // Reads as String, will convert to boolean
+  private int        userAge;
+  private int        userHeightInches;
+  private int        userWeight;
+  private double     userBMR;
+  private int        userLifestyle;
+  private String     userID;
+  private String     userPassword;
+  private DateRecord userDateJoined;
   private ArrayList<UserAccount> UserCollection;
 
-  FileReader(String _Filename)
+  FileReader(String _filename)
   {
-    super(_Filename);
-    filename = _Filename;
+    super(_filename);
+    filename = _filename;
   }
 
   public void initialDataLoad(File _userDatabase, ArrayList<UserAccount> _UserCollection) throws FileNotFoundException
@@ -57,7 +57,7 @@ public class FileReader extends File
     }
     databaselineReader.close();
     UserCollection = _UserCollection;
-  }         // End initialDataLoad(...)
+  }  // End void initialDataLoad()
 
   public void updateProfileDatabase() throws FileNotFoundException
   {
