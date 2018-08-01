@@ -50,7 +50,7 @@ public class Profile
           FitnessAssistant.clearScreen();
           int updateProfileInput = -1;
           System.out.print("\n\t---------------\n\t| Update Menu |\n\t---------------\n\nWhat would you like to update?\n\n\t1.) Name\n\t2.) Age"
-          + "\n\t3.) Height\n\t4.) Lifestyle\n\n\t9.) Save and Exit\n\n***Reminder: you can update your weight from the profile menu***\n\nSelection: ");
+          + "\n\t3.) Height\n\t4.) Lifestyle\n\n\t9.) Save Changes and Exit\n\n***Reminder: you can update your weight from the profile menu***\n\nSelection: ");
           try
           {
             updateProfileInput = Integer.parseInt(userInput.next());
@@ -114,8 +114,53 @@ public class Profile
           // User selects "Update Height"
           else if (updateProfileInput == 3)
           {
+            FitnessAssistant.clearScreen();
+            System.out.print("\n\t-----------------\n\t| Update Height |\n\t-----------------\n\n");
+            System.out.print("Current profile height: " + currentUser.getHeightCompleteString() + "\n------------------------------\nUpdated profile height\n\tFeet: ");
 
+            int newUserHeightFeet = -1;
+            int newUserHeightInches = -1;
+            try
+            {
+              newUserHeightFeet = Integer.parseInt(userInput.next());
+              if (newUserHeightFeet <= 2 || newUserHeightFeet > 12)
+              {
+                System.out.print("\n\nSorry, Invalid input provided.\n\n------------------------\nReturning to Update Menu");
+                FitnessAssistant.timedClearScreen();
+              }
+              else
+              {
+                System.out.print("\tInches: ");
+                try
+                {
+                  newUserHeightInches = Integer.parseInt(userInput.next());
+                  if (newUserHeightInches < 0 || newUserHeightInches >= 12)
+                  {
+                    System.out.print("\n\nSorry, Invalid input provided.\n\n------------------------\nReturning to Update Menu");
+                    FitnessAssistant.timedClearScreen();
+                  }
+                  else
+                  {
+                    currentUser.setHeight((newUserHeightFeet * 12) + newUserHeightInches);
+                    System.out.print(currentUser.getHeightCompleteString() + " makes you " + currentUser.getHeightInches() + " inches tall.\n\n"
+                      + "Your new height has been updated.\n\n----------------------------------------\nReturning to Profile Menu");
+                    FitnessAssistant.timedClearScreen();
+                  }
+                }
+                catch (NumberFormatException nfe)
+                {
+                  System.out.print("\n\nSorry, Invalid input provided.\n\n------------------------\nReturning to Update Menu");
+                  FitnessAssistant.timedClearScreen();
+                }
+              }
+            }
+            catch (NumberFormatException nfe)
+            {
+              System.out.print("\n\nSorry, Invalid input provided.\n\n------------------------\nReturning to Update Menu");
+              FitnessAssistant.timedClearScreen();
+            }
           }
+
           // User selects "Update Lifestyle"
           else if (updateProfileInput == 4)
           {
