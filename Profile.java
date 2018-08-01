@@ -193,7 +193,6 @@ public class Profile
 
       else
       {
-        System.out.println("Other input detected.");
         FitnessAssistant.clearScreen();
         continueProgram = true;
       }
