@@ -35,9 +35,10 @@ public class UserAccount
   public int     getHeightInches()  { return userHeightInches; }
   public String  getHeightCompleteString()
   {
-    int userHeightFeet = userHeightInches / 12;
-    userHeightInches = userHeightInches % 12;
-    return userHeightFeet + "\'" + userHeightInches + "\"";
+    int ByValUserHeightInches = userHeightInches;
+    int userHeightFeet = ByValUserHeightInches / 12;
+    ByValUserHeightInches = ByValUserHeightInches % 12;
+    return userHeightFeet + "\'" + ByValUserHeightInches + "\"";
   } // End String getHeightCompleteString()
 
   public int    getWeight()    { return userWeight;    }
