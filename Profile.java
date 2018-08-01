@@ -57,7 +57,6 @@ public class Profile
           }
           catch (NumberFormatException nfe)
           {
-            continueUpdateProfile = true;
           }
 
           // User selects "Update Name"
@@ -85,6 +84,31 @@ public class Profile
           // User selects "Update Age"
           else if (updateProfileInput == 2)
           {
+            FitnessAssistant.clearScreen();
+            System.out.print("\n\t--------------\n\t| Update Age |\n\t--------------\n\n");
+            System.out.print("Current profile age: " + currentUser.getAge() + "\n------------------------------\n\tUpdated profile age: ");
+            int newProfileAge = -1;
+            try
+            {
+              newProfileAge = Integer.parseInt(userInput.next());
+              if (!(newProfileAge <= 2 || newProfileAge > 120))
+              {
+                currentUser.setAge(newProfileAge);
+                System.out.print("\n\nSuccess! Your profile age has been updated to: " + newProfileAge + "\n\n----------------------------------------\nReturning to Profile Menu");
+                FitnessAssistant.timedClearScreen();
+              }
+              else
+              {
+                System.out.print("\n\nSorry, Invalid age provided.\n\n------------------------\nReturning to Update Menu");
+                FitnessAssistant.timedClearScreen();
+              }
+
+            }
+            catch (NumberFormatException nfe)
+            {
+              System.out.print("\n\nSorry, Invalid input provided.\n\n------------------------\nReturning to Update Menu");
+              FitnessAssistant.timedClearScreen();
+            }
 
           }
           // User selects "Update Height"
