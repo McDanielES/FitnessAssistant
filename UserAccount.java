@@ -45,6 +45,21 @@ public class UserAccount
   public int    getLifestyle() { return userLifestyle; }
   public String getUserID()    { return userID;        }
   public String getPassword()  { return userPassword;  }
+  public static String getLifestyleText(int _lifestyleIndex)
+  {
+    if (_lifestyleIndex == 1)
+      return "Sedentary (little or no exercise)";
+    else if (_lifestyleIndex == 2)
+      return "Lightly active (light exercise/sports 1-3 days/week)";
+    else if (_lifestyleIndex == 3)
+      return "Moderately active (moderate exercise/sports 3-5 days/week)";
+    else if (_lifestyleIndex == 4)
+      return "Very active (hard exercise/sports 6-7 days a week)";
+    else if (_lifestyleIndex == 5)
+      return "Extra active (very hard exercise/sports & physical job or 2x training)";
+    else
+      return "Error";
+  }
 
   public long   getJoined()          { return userDateJoined.getUserJoined(); }
   public String getJoinedDayOfWeek() { return userDateJoined.getDayOfWeek();  }

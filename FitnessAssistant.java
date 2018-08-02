@@ -35,7 +35,7 @@ public class FitnessAssistant
         if(hasAccount == 'Q' || hasAccount == 'q')
         {
           userContinue = false;
-          System.out.print("\n\n\tThank you for using The Fitness Assistant!\n\tWritten by Eric S McDaniel, July 2018.\n\n");
+          System.out.print("\n\n\tThank you for using The Fitness Assistant!\n\tWritten by Eric S McDaniel, July-August 2018.\n\n");
         }
         else
         {
@@ -158,9 +158,9 @@ public class FitnessAssistant
             double userBMR = -1;
 
             // Determine user's lifestyle
-            System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: Sedentary (little or no exercise)\n\t\tOption 2: Lightly active (light exercise/sports 1-3 days/week)"
-              + "\n\t\tOption 3: Moderately active (moderate exercise/sports 3-5 days/week)\n\t\tOption 4: Very active (hard exercise/sports 6-7 days a week)"
-              + "\n\t\tOption 5: Extra active (very hard exercise/sports & physical job or 2x training)"
+            System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: " + UserAccount.getLifestyleText(1) + "\n\t\tOption 2: "
+              + UserAccount.getLifestyleText(2) + "\n\t\tOption 3: " + UserAccount.getLifestyleText(3) + "\n\t\tOption 4: "
+              + UserAccount.getLifestyleText(4) + "\n\t\tOption 5: " + UserAccount.getLifestyleText(5)
               + "\n\t\t---------------------------------------------------------------------\n\tLifestyle option (1-5): ");
             boolean validLifestyleRange = false;
             int userLifestyle = 0;
