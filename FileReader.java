@@ -19,15 +19,16 @@ public class FileReader extends File
   private DateRecord userDateJoined;
   private ArrayList<UserAccount> UserCollection;
 
-  FileReader(String _filename)
+  FileReader(String _filename, ArrayList<UserAccount> _UserCollection)
   {
     super(_filename);
     filename = _filename;
+    UserCollection = _UserCollection;
   }
 
-  public void initialDataLoad(File _userDatabase, ArrayList<UserAccount> _UserCollection) throws FileNotFoundException
+  public void initialDataLoad() throws FileNotFoundException
   {
-    Scanner databaselineReader = new Scanner(_userDatabase);
+    Scanner databaselineReader = new Scanner(new File(filename));
     long tempReaderLong = 0;
 
     while (databaselineReader.hasNextLine())
@@ -53,10 +54,9 @@ public class FileReader extends File
 
       // Instantiate objects of class UserAccount and append to arraylist
       UserAccount completeUserRecord = new UserAccount(userFirstName, isMale, userAge, userHeightInches, userWeight, userBMR, userLifestyle, userID, userPassword, userDateJoined);
-      _UserCollection.add(completeUserRecord);
+      UserCollection.add(completeUserRecord);
     }
     databaselineReader.close();
-    UserCollection = _UserCollection;
   }  // End void initialDataLoad()
 
   public void updateProfileDatabase() throws FileNotFoundException
@@ -83,4 +83,14 @@ public class FileReader extends File
     }
     updateWriter.close();
   }        // End addNewProfile(...)
-}  //End class FileReader()
+  public void clearLocalMemory() throws FileNotFoundException
+  {
+    UserCollection.clear();
+    initialDataLoad();
+  }
+  public UserAccount getReloadedProfile(int _userProfileIndex)
+  {
+    return UserCollection.get(_userProfileIndex);
+  }
+
+}  // End class FileReader()

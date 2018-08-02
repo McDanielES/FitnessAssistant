@@ -12,14 +12,14 @@ public class FitnessAssistant
   {
     clearScreen();
     String databaseFilename = "ProfilesDatabase.txt";
-    FileReader userDatabase = new FileReader(databaseFilename);
+    ArrayList<UserAccount> UserCollection = new ArrayList<UserAccount>();
+    FileReader userDatabase = new FileReader(databaseFilename, UserCollection);
     if (!userDatabase.exists())
       System.out.print("Error: User Profiles could not be loaded. Please contact the developer to resolve this issue.\n");
     else
     {
       // Read from the file and store user profiles into memory. Yes this isn't practical. This database doesn't have ten million accounts however.
-      ArrayList<UserAccount> UserCollection = new ArrayList<UserAccount>();
-      userDatabase.initialDataLoad(userDatabase, UserCollection);
+      userDatabase.initialDataLoad();
       boolean userContinue = true;
 
       do
@@ -158,9 +158,10 @@ public class FitnessAssistant
             double userBMR = -1;
 
             // Determine user's lifestyle
-            System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: Sedentary (little or no exercise)\n\t\tOption 2: Lightly active (light exercise/sports 1-3 days/week)" +
-              "\n\t\tOption 3: Moderately active (moderate exercise/sports 3-5 days/week)\n\t\tOption 4: Very active (hard exercise/sports 6-7 days a week)" +
-              "\n\t\tOption 5: Extra active (very hard exercise/sports & physical job or 2x training)\n\t\t---------------------------------------------------------------------\n\tLifestyle option (1-5): ");
+            System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: Sedentary (little or no exercise)\n\t\tOption 2: Lightly active (light exercise/sports 1-3 days/week)"
+              + "\n\t\tOption 3: Moderately active (moderate exercise/sports 3-5 days/week)\n\t\tOption 4: Very active (hard exercise/sports 6-7 days a week)"
+              + "\n\t\tOption 5: Extra active (very hard exercise/sports & physical job or 2x training)"
+              + "\n\t\t---------------------------------------------------------------------\n\tLifestyle option (1-5): ");
             boolean validLifestyleRange = false;
             int userLifestyle = 0;
             do
@@ -169,9 +170,9 @@ public class FitnessAssistant
               {
                 userLifestyle = Integer.parseInt(userInputTemp.next());
                 if (userLifestyle <= 0 || userLifestyle > 5)
-                System.out.print("\t\tThat was not one of the listed options. Try again.\n\tLifestyle option (1-5): ");
+                  System.out.print("\t\tThat was not one of the listed options. Try again.\n\tLifestyle option (1-5): ");
                 else
-                validLifestyleRange = true;
+                  validLifestyleRange = true;
               }
               catch (NumberFormatException nfe)
               {
@@ -210,7 +211,7 @@ public class FitnessAssistant
 
             // Create the user's password
             System.out.print("\tYour auto generated username is \n\t-------------------------------\n\t\t  "
-            + userID + "\n\t-------------------------------\n\tTry not to forget it!\n\n\tProvide a password: ");
+              + userID + "\n\t-------------------------------\n\tTry not to forget it!\n\n\tProvide a password: ");
             String userPassword = userInputTemp.next();
             System.out.print("\t-------------------------------\n\t\t|| Username: " + userID + " \n\t\t|| Password: " + userPassword
               + "\n\t-------------------------------\n\nThanks for creating an account, " + userFirstName + "!\n");
@@ -274,7 +275,7 @@ public class FitnessAssistant
                 {
                   // If the user isn't within three years of age, recovery is impossible.
                   System.out.print("\nSorry, there are no profiles named " + username + " who are reasonably close to " + userAgeRecovery + " years old.\n"
-                  + "Please either contact the developer or create a new profile to get started.\n");
+                    + "Please either contact the developer or create a new profile to get started.\n");
                   userContinue = continueProgram(userInput);
                 }
                 else
@@ -316,7 +317,7 @@ public class FitnessAssistant
                   if (userArrayListIndex >= 0)
                   {
                     System.out.print("\t-----------------------------\n\t|| Your Username is: " + UserCollection.get(userArrayListIndex).getUserID()
-                    + "\n\t|| Your Password is: " + UserCollection.get(userArrayListIndex).getPassword() + "\n\t-----------------------------\n");
+                      + "\n\t|| Your Password is: " + UserCollection.get(userArrayListIndex).getPassword() + "\n\t-----------------------------\n");
                     userContinue = continueProgram(userInput);
                   }
                   else
@@ -370,7 +371,7 @@ public class FitnessAssistant
 
                   // Collect last login before its overwritten, and create object to direct to Profile menu.
                   long lastLogin = UserCollection.get(userProfileIndex).getLastLogin();
-                  Profile currentUser = new Profile(UserCollection.get(userProfileIndex), lastLogin, userDatabase);
+                  Profile currentUser = new Profile(UserCollection.get(userProfileIndex), lastLogin, userDatabase, userProfileIndex);
 
                   // Reset last login, save to database, and present special "first time" Profile menu.
                   UserCollection.get(userProfileIndex).setLastLogin(System.currentTimeMillis());
