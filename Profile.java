@@ -39,7 +39,7 @@ public class Profile
       }
 
       /***************************************************************************************|
-      |                       (1) "Update Weight / Recalculate BMR"                           |
+      |                       (1) "Get User's Statistics"                                     |
       |***************************************************************************************/
       if (input == 1)
       {
@@ -52,7 +52,39 @@ public class Profile
       |***************************************************************************************/
       else if (input == 2)
       {
+        boolean continueRecalculateBMR = false;
+        int newProfileWeight = -1;
+        do
+        {
+          FitnessAssistant.clearScreen();
+          continueRecalculateBMR = false;
+          System.out.print("\n\t-------------------------------------\n\t|  Update Weight / Recalculate BMR  |"
+            + "\n\t-------------------------------------\n\nWhat is your new weight?\n---------------------------"
+            + "\n\tCurrent Weight: " + currentUser.getWeight() + " lbs.\n\tUpdated Weight: ");
+          try
+          {
+            newProfileWeight = Integer.parseInt(userInput.next());
+            System.out.print("---------------------------\nYou entered a new weight of " + newProfileWeight + " lbs. Is this correct?\n\tType Y/n to confirm: ");
+            String newWeightConfirm = "";
+            newWeightConfirm = userInput.next();
+            if (!(newWeightConfirm.charAt(0) == 'Y' || newWeightConfirm.charAt(0) == 'y'))
+            {
+              System.out.print("\n_________________________________________________\nCannot confirm new weight. Returning to Main Menu");
+              FitnessAssistant.timedClearScreen();
+            }
+            else
+            {
+              System.out.print("\nCongrats!");
+            }
+          }
+          catch (NumberFormatException nfe)
+          {
+            continueRecalculateBMR = true;
+          }
+        }
+        while (continueRecalculateBMR);
         FitnessAssistant.clearScreen();
+
       }
 
       /***************************************************************************************|
