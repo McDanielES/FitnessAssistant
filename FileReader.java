@@ -82,15 +82,17 @@ public class FileReader extends File
       updateWriter.println(UserCollection.get(i).getLastLogin());
     }
     updateWriter.close();
-  }        // End addNewProfile(...)
+  } // End addNewProfile(...)
+
   public void clearLocalMemory() throws FileNotFoundException
   {
     UserCollection.clear();
     initialDataLoad();
-  }
+  } // End clearLocalMemory()
+
   public UserAccount getReloadedProfile(int _userProfileIndex)
   {
     return UserCollection.get(_userProfileIndex);
-  }
+  } // End getReloadedProfile(...)
 
-}  // End class FileReader()
+}   // End class FileReader()
