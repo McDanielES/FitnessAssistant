@@ -12,14 +12,14 @@ public class FitnessAssistant
   {
     clearScreen();
     String databaseFilename = "ProfilesDatabase.txt";
-    FileReader userDatabase = new FileReader(databaseFilename);
+    ArrayList<UserAccount> UserCollection = new ArrayList<UserAccount>();
+    FileReader userDatabase = new FileReader(databaseFilename, UserCollection);
     if (!userDatabase.exists())
       System.out.print("Error: User Profiles could not be loaded. Please contact the developer to resolve this issue.\n");
     else
     {
       // Read from the file and store user profiles into memory. Yes this isn't practical. This database doesn't have ten million accounts however.
-      ArrayList<UserAccount> UserCollection = new ArrayList<UserAccount>();
-      userDatabase.initialDataLoad(userDatabase, UserCollection);
+      userDatabase.initialDataLoad();
       boolean userContinue = true;
 
       do
@@ -371,7 +371,7 @@ public class FitnessAssistant
 
                   // Collect last login before its overwritten, and create object to direct to Profile menu.
                   long lastLogin = UserCollection.get(userProfileIndex).getLastLogin();
-                  Profile currentUser = new Profile(UserCollection.get(userProfileIndex), lastLogin, userDatabase);
+                  Profile currentUser = new Profile(UserCollection.get(userProfileIndex), lastLogin, userDatabase, userProfileIndex);
 
                   // Reset last login, save to database, and present special "first time" Profile menu.
                   UserCollection.get(userProfileIndex).setLastLogin(System.currentTimeMillis());
