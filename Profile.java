@@ -25,7 +25,7 @@ public class Profile
     int input = -1;
     do
     {
-      System.out.print("\n\t----------------\n\t| Profile Menu |\n\t----------------\n\n\nPlease select an option:\n\n\t1.) Update Weight / Recalculate "
+      System.out.print("\n----------------------------------\n\t" + currentUser.getName() + "\'s Main Menu\n----------------------------------\n\n\nPlease select an option:\n\n\t1.) Update Weight / Recalculate "
         + "BMR\n\t2.) Update User Fitness Profile\n\n\t9.) Exit Application\n\nSelection: ");
       try
       {
@@ -220,8 +220,22 @@ public class Profile
           {
             if (profileChangeRequested)
             {
-              userDatabase.updateProfileDatabase();
-              profileChangeRequested = false;
+              FitnessAssistant.clearScreen();
+              System.out.print("/---------------------------------------\\\n|\t Authorization Required \t|\n\\---------------------------------------/"
+                + "\n\nPlease enter your password to save your changes.\n\tPassword: ");
+              String userUpdateProfilePassword = "";
+              userUpdateProfilePassword = userInput.next();
+              if (userUpdateProfilePassword.equals(currentUser.getPassword()))
+              {
+                userDatabase.updateProfileDatabase();
+                profileChangeRequested = false;
+                System.out.print("\n\nYour changes have been successfully saved.\n\n----------------------------------------\nReturning to Update Menu");
+                FitnessAssistant.timedClearScreen();
+              }
+              else
+              {
+                System.out.print("\n\tInvalid Password!\nYour request has been denied. Please try again.");
+              }
             }
             continueProgram = true;
             continueUpdateProfile = false;
@@ -288,7 +302,7 @@ public class Profile
   public String initialWelcomeMenu()
   {
     return ("---------------------------------\n\t Welcome, " + currentUser.getName() + "!\n---------------------------------\n\nIt's been "
-      + getLastLogin() + " since\nyou've last logged in.\n---------------------------------\n");
+      + getLastLogin() + " since\nyou've last logged in.\n\n");
   } // End initialWelcomeMenu()
 
 }
