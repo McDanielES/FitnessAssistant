@@ -231,21 +231,20 @@ public class Profile
                 profileChangeRequested = false;
                 System.out.print("\n\nYour changes have been successfully saved.\n\n----------------------------------------\nReturning to Update Menu");
                 FitnessAssistant.timedClearScreen();
+                continueUpdateProfile = false;
               }
               else
               {
-                System.out.print("\n\tInvalid Password!\nYour request has been denied. Please try again.");
+                System.out.print("\n\tInvalid Password!\nYour request has been denied. Please try again");
+                FitnessAssistant.timedClearScreen();
               }
             }
-            continueProgram = true;
-            continueUpdateProfile = false;
           }
           /////////////////////////       (2) "Update User Profile", (10) "Exit Without Saving Changes"     /////////////////////////
           else if ((profileChangeRequested) && updateProfileInput == 10)
           {
             userDatabase.clearLocalMemory();
             currentUser = userDatabase.getReloadedProfile(userProfileIndex);
-
             profileChangeRequested = false;
             continueProgram = true;
             continueUpdateProfile = false;
