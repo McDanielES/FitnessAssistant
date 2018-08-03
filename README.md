@@ -1,5 +1,6 @@
-# FitnessAssistant
+# The Fitness Assistant
 ### A user profile tracking experience for Basal Metabolic Rate (BMR) and overall fitness progress console application
+![Sample image of the user' profile main menu](https://i.imgur.com/DdkJtwx.png)
 ---
 ## Important Note:
 This application will not work immediately after cloning/ forking. You MUST first create a blank text document titled `ProfilesDatabase.txt` and store it on your local repository's main directory.
