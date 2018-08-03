@@ -12,6 +12,7 @@ public class FileReader extends File
   private int        userAge;
   private int        userHeightInches;
   private int        userWeight;
+  private int        userStartingWeight;
   private double     userBMR;
   private int        userLifestyle;
   private String     userID;
@@ -33,17 +34,18 @@ public class FileReader extends File
 
     while (databaselineReader.hasNextLine())
     {
-      userFirstName = databaselineReader.nextLine();
+      userFirstName      = databaselineReader.nextLine();
       if (databaselineReader.nextLine().equals("true"))
         isMale = "true";
-      userAge          = Integer.parseInt(databaselineReader.nextLine());
-      userHeightInches = Integer.parseInt(databaselineReader.nextLine());
-      userWeight       = Integer.parseInt(databaselineReader.nextLine());
-      userBMR          = Double.parseDouble(databaselineReader.nextLine());
-      userLifestyle    = Integer.parseInt(databaselineReader.nextLine());
-      userID           = databaselineReader.nextLine();
-      userPassword     = databaselineReader.nextLine();
-      tempReaderLong   = Long.parseLong(databaselineReader.nextLine());
+      userAge            = Integer.parseInt(databaselineReader.nextLine());
+      userHeightInches   = Integer.parseInt(databaselineReader.nextLine());
+      userWeight         = Integer.parseInt(databaselineReader.nextLine());
+      userStartingWeight = Integer.parseInt(databaselineReader.nextLine());
+      userBMR            = Double.parseDouble(databaselineReader.nextLine());
+      userLifestyle      = Integer.parseInt(databaselineReader.nextLine());
+      userID             = databaselineReader.nextLine();
+      userPassword       = databaselineReader.nextLine();
+      tempReaderLong     = Long.parseLong(databaselineReader.nextLine());
 
       userDateJoined = new DateRecord(tempReaderLong);
       userDateJoined.setDayOfWeek(databaselineReader.nextLine());
@@ -53,7 +55,8 @@ public class FileReader extends File
       userDateJoined.setLastLogin(Long.parseLong(databaselineReader.nextLine()));
 
       // Instantiate objects of class UserAccount and append to arraylist
-      UserAccount completeUserRecord = new UserAccount(userFirstName, isMale, userAge, userHeightInches, userWeight, userBMR, userLifestyle, userID, userPassword, userDateJoined);
+      UserAccount completeUserRecord = new UserAccount(userFirstName, isMale, userAge, userHeightInches,
+          userWeight, userStartingWeight, userBMR, userLifestyle, userID, userPassword, userDateJoined);
       UserCollection.add(completeUserRecord);
     }
     databaselineReader.close();
@@ -69,11 +72,11 @@ public class FileReader extends File
       updateWriter.println(UserCollection.get(i).getAge());
       updateWriter.println(UserCollection.get(i).getHeightInches());
       updateWriter.println(UserCollection.get(i).getWeight());
+      updateWriter.println(UserCollection.get(i).getStartingWeight());
       updateWriter.println(UserCollection.get(i).getBMR());
       updateWriter.println(UserCollection.get(i).getLifestyle());
       updateWriter.println(UserCollection.get(i).getUserID());
       updateWriter.println(UserCollection.get(i).getPassword());
-
       updateWriter.println(UserCollection.get(i).getJoined());
       updateWriter.println(UserCollection.get(i).getJoinedDayOfWeek());
       updateWriter.println(UserCollection.get(i).getJoinedMonth());
@@ -95,4 +98,13 @@ public class FileReader extends File
     return UserCollection.get(_userProfileIndex);
   } // End getReloadedProfile(...)
 
-}   // End class FileReader()
+  public boolean searchExistingUsernames(String _newUsername)
+  {
+    for (int i = 0; i < UserCollection.size(); ++i)
+    {
+      if (UserCollection.get(i).getUserID().equals(_newUsername))
+        return true;
+    }
+    return false;
+  } // End searchExistingUsernames(...)
+}  // End class FileReader()
