@@ -64,6 +64,7 @@ public class UserAccount
       return "Error";
   }
 
+  public DateRecord getDateJoined() { return userDateJoined; }
   public long   getJoined()          { return userDateJoined.getUserJoined(); }
   public String getJoinedDayOfWeek() { return userDateJoined.getDayOfWeek();  }
   public String getJoinedMonth()     { return userDateJoined.getUserMonth();  }
