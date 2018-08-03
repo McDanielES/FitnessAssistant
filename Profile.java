@@ -18,17 +18,17 @@ public class Profile
     userProfileIndex = _userProfileIndex;
   }
 
-  public void start() throws FileNotFoundException
+  public boolean start() throws FileNotFoundException
   {
     boolean continueProgram = true;
     Scanner userInput = new Scanner(System.in);
     int input = -1;
     do
     {
-      System.out.print("\n----------------------------------\n\t" + currentUser.getName() + "\'s Main Menu"
-        + "\n----------------------------------\n\n\nPlease select an option:\n\n\t1.) Get " + currentUser.getName()
-        + "\'s Statistics\n\t2.) Update Weight / Recalculate "
-        + "BMR\n\t3.) Update User Fitness Profile Attributes\n\n\t9.) Exit Application\n\nSelection: ");
+      System.out.print("\n-------------------------------------\n\t" + currentUser.getName() + "\'s Profile Menu"
+        + "\n-------------------------------------\n\n\nPlease select an option:\n\n\t1.) Get " + currentUser.getName()
+        + "\'s Statistics\n\t2.) Update Weight / Recalculate BMR\n\t3.) Update User Fitness Profile Attributes"
+        + "\n\t4.) Change Username / Password\n\n\t9.)  Log Out and Return to Main Menu\n\t10.) Exit Application\n\nSelection: ");
       try
       {
         input = Integer.parseInt(userInput.next());
@@ -54,38 +54,61 @@ public class Profile
       {
         boolean continueRecalculateBMR = false;
         int newProfileWeight = -1;
+        int newWeightConfirm = -1;
         do
         {
           FitnessAssistant.clearScreen();
           continueRecalculateBMR = false;
           System.out.print("\n\t-------------------------------------\n\t|  Update Weight / Recalculate BMR  |"
-            + "\n\t-------------------------------------\n\nWhat is your new weight?\n---------------------------"
-            + "\n\tCurrent Weight: " + currentUser.getWeight() + " lbs.\n\tUpdated Weight: ");
+            + "\n\t-------------------------------------\n\nWhat is your new weight?\n--------------------------------"
+            + "\n\n\tCurrent Weight: " + currentUser.getWeight() + " lbs.\n\tUpdated Weight: ");
           try
           {
             newProfileWeight = Integer.parseInt(userInput.next());
-            System.out.print("---------------------------\nYou entered a new weight of " + newProfileWeight + " lbs. Is this correct?\n\tType Y/n to confirm: ");
-            String newWeightConfirm = "";
-            newWeightConfirm = userInput.next();
-            if (!(newWeightConfirm.charAt(0) == 'Y' || newWeightConfirm.charAt(0) == 'y'))
+            System.out.print("\t-------------------\n\tPlease reenter: ");
+            try
             {
-              System.out.print("\n_________________________________________________\nCannot confirm new weight. Returning to Main Menu");
-              FitnessAssistant.timedClearScreen();
-            }
-            else
+              newWeightConfirm = Integer.parseInt(userInput.next());
+              if (!(newProfileWeight == newWeightConfirm))
+              {
+                System.out.print("\n_________________________________________________\nCannot confirm new weight. Returning to Main Menu");
+                FitnessAssistant.timedClearScreen();
+              }
+              // User confirms a new weight change.
+              else
+              {
+                FitnessAssistant.clearScreen();
+                if (newProfileWeight > currentUser.getWeight())
+                {
+                  System.out.print("\n--------------------------------\nUh oh! That's a gain of " + (newProfileWeight - currentUser.getWeight()) + " lbs!"
+                    + "\n--------------------------------");
+                }
+                else
+                {
+                  System.out.print("\n--------------------------------\nWoo hoo! That's a loss of " + (currentUser.getWeight() - newProfileWeight) + " lbs!"
+                    + "\n--------------------------------");
+                }
+                System.out.print("\n\n\n-----------------------------------\n\t" + currentUser.getName() + "\'s Statistics"
+                  + "\n-----------------------------------");
+
+                //// TO DO: Create a new class. One that passes variables for standard statistics (1), and another for updated weight (2)
+
+
+              } // End if User correctly confirmed weight
+            } // End valid input
+            catch (NumberFormatException nfe)
             {
-              System.out.print("\nCongrats!");
+              continueRecalculateBMR = true;
             }
-          }
+          }  // End valid input
           catch (NumberFormatException nfe)
           {
             continueRecalculateBMR = true;
           }
-        }
+        } //End do
         while (continueRecalculateBMR);
         FitnessAssistant.clearScreen();
-
-      }
+      } // End (2) "Update Weight / Recalculate BMR"
 
       /***************************************************************************************|
       |                       (3) "Update User Profile" Update Menu                           |
@@ -300,13 +323,157 @@ public class Profile
 
 
         } while (continueUpdateProfile);
-      input = -1;
-      FitnessAssistant.clearScreen();
+        input = -1;
+        FitnessAssistant.clearScreen();
       }
       /***********************************************************************|
-      |                       (9) "Exit Application"                          |
+      |                   (4) "Change Username / Password"                    |
       |***********************************************************************/
+      else if (input == 4)
+      {
+        boolean continueUpdateLogin = true;
+        boolean loginChangeRequested = false;
+        do
+        {
+          FitnessAssistant.clearScreen();
+          int updateLoginInput = -1;
+
+          System.out.print("\n\t-------------------------------\n\t|  Update Account Login Menu  |\n\t-------------------------------\n\n");
+          if (loginChangeRequested)
+            System.out.print("--------------------------------------------------------------------\n***You have unsaved updates. "
+              + "Select Option 9 to save the changes!***\n--------------------------------------------------------------------");
+          else
+            System.out.print(" Which account credential would you like to update?\n----------------------------------------------------");
+
+          System.out.print("\n\n\tSelection:\tCurrent Attribute:\n\t----------------------------------\n\t1.) Username\t" + currentUser.getUserID()
+            + "\n\t2.) Password\t" + currentUser.getPassword());
+          if (loginChangeRequested)
+          {
+            System.out.print("\n\n\n\t9.) Save Changes and Exit\n\t10.) Exit Without Saving Changes\n\nSelection: ");
+          }
+          else
+          {
+            System.out.print("\n\n\n\t9.) Exit Without Making Changes\n\nSelection: ");
+          }
+          try
+          {
+            updateLoginInput = Integer.parseInt(userInput.next());
+          }
+          catch (NumberFormatException nfe)
+          { // Nothing, the loop will reiterate and clear the screen.
+          }
+
+          /////////////////////////       (4) "Change Username / Password", (1) "Username"     /////////////////////////
+          if (updateLoginInput == 1)
+          {
+            FitnessAssistant.clearScreen();
+            System.out.print("\n\t-------------------\n\t| Update Username |\n\t-------------------\n\n");
+            System.out.print("Current username: " + currentUser.getUserID() + "\n-------------------------------\n\tUpdated username: ");
+            String newUsername = userInput.next();
+            System.out.print("\tConfirm updated username: ");
+            String newUsernameConfirmed = userInput.next();
+            if (newUsername.equals(newUsernameConfirmed) && (!userDatabase.searchExistingUsernames(newUsername)))
+            {
+              currentUser.setUsername(newUsername);
+              loginChangeRequested = true;
+            }
+            else if (userDatabase.searchExistingUsernames(newUsername))
+            {
+              System.out.print("\n\nSorry, the username " + newUsername + " has already been taken.\nPlease try a different username."
+                + "\n\n------------------------\nReturning to Update Menu");
+              FitnessAssistant.timedClearScreen();
+            }
+            else
+            {
+              System.out.print("\n\nSorry, username could NOT be updated. Invalid input likely.\n\n------------------------\nReturning to Update Menu");
+              FitnessAssistant.timedClearScreen();
+            }
+          }
+          /////////////////////////       (4) "Change Username / Password", (2) "Password"     /////////////////////////
+          else if (updateLoginInput == 2)
+          {
+            FitnessAssistant.clearScreen();
+            System.out.print("\n\t-------------------\n\t| Update Password |\n\t-------------------\n\n");
+            System.out.print("Current profile password: " + currentUser.getPassword() + "\n------------------------------\n\tUpdated profile password: ");
+            String newPassword = "";
+            newPassword = userInput.next();
+            System.out.print("\tConfirm new password: ");
+            String confirmNewPassword = "";
+            confirmNewPassword = userInput.next();
+            if (newPassword.equals(confirmNewPassword))
+            {
+              currentUser.setPassword(newPassword);
+              loginChangeRequested = true;
+            }
+            else
+            {
+              System.out.print("\n\nSorry, Invalid password provided.\n\n------------------------\nReturning to Update Menu");
+              FitnessAssistant.timedClearScreen();
+            }
+          }
+
+          /////////////////////////       (4) "Change Username / Password", (9) "Save Changes and Exit"     /////////////////////////
+          else if (updateLoginInput == 9)
+          {
+            if (loginChangeRequested)
+            {
+              FitnessAssistant.clearScreen();
+              System.out.print("/---------------------------------------\\\n|\t Authorization Required \t|\n\\---------------------------------------/"
+                + "\n\nPlease enter your password to save your changes.\n(Provide your new password if your password was changed)\n\n\tPassword: ");
+              String userUpdateProfilePassword = "";
+              userUpdateProfilePassword = userInput.next();
+              if (userUpdateProfilePassword.equals(currentUser.getPassword()))
+              {
+                userDatabase.updateProfileDatabase();
+                loginChangeRequested = false;
+                System.out.print("\n\nYour changes have been successfully saved.\n\n----------------------------------------\nReturning to Update Menu");
+                FitnessAssistant.timedClearScreen();
+                continueUpdateLogin = false;
+              }
+              else
+              {
+                System.out.print("\n\tInvalid Password!\nYour request has been denied. Please try again");
+                FitnessAssistant.timedClearScreen();
+              }
+            }
+            else
+            {
+              continueUpdateLogin = false;
+            }
+          }
+          /////////////////////////       (4) "Change Username / Password", (10) "Exit Without Saving Changes"     /////////////////////////
+          else if ((loginChangeRequested) && updateLoginInput == 10)
+          {
+            userDatabase.clearLocalMemory();
+            currentUser = userDatabase.getReloadedProfile(userProfileIndex);
+            loginChangeRequested = false;
+            continueProgram = true;
+            continueUpdateLogin = false;
+          }
+          // User provides invalid input.
+          else
+          {
+
+          }
+
+
+        } while (continueUpdateLogin);
+        input = -1;
+        FitnessAssistant.clearScreen();
+
+      }
+      /************************************************************|
+      |                       (9) "Logout"                         |
+      |************************************************************/
       else if (input == 9)
+      {
+        FitnessAssistant.clearScreen();
+        return true;
+      }
+      /***********************************************************************|
+      |                       (10) "Exit Application"                         |
+      |***********************************************************************/
+      else if (input == 10)
       {
         FitnessAssistant.clearScreen();
         continueProgram = false;
@@ -320,11 +487,7 @@ public class Profile
       }
 
     } while (continueProgram);
-
-
-
-
-
+    return false;
   } // End void Start(), the main of the Profile class
 
   private String getLastLogin()
@@ -344,6 +507,6 @@ public class Profile
   public String initialWelcomeMenu()
   {
     return ("---------------------------------\n\t Welcome, " + currentUser.getName() + "!\n---------------------------------\n\nIt's been "
-      + getLastLogin() + " since\nyou've last logged in.\n\n");
+      + getLastLogin() + " since\nyou've last logged in.\n\n\n");
   } // End initialWelcomeMenu()
 } // End class Profile
