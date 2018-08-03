@@ -5,6 +5,7 @@ public class UserAccount
   private int        userAge;
   private int        userHeightInches;
   private int        userWeight;
+  private int        userStartingWeight;
   private double     userBMR;
   private int        userLifestyle;
   private String     userID;
@@ -13,20 +14,21 @@ public class UserAccount
 
   UserAccount(){}
 
-  UserAccount(String _userFirstName, String _isMale, int _userAge, int _userHeightInches,
-    int _userWeight, double _userBMR, int _userLifestyle, String _userID, String _userPassword, DateRecord _userDateJoined)
+  UserAccount(String _userFirstName, String _isMale, int _userAge, int _userHeightInches, int _userWeight,
+    int _userStartingWeight, double _userBMR, int _userLifestyle, String _userID, String _userPassword, DateRecord _userDateJoined)
     {
-      userFirstName    = _userFirstName;
+      userFirstName      = _userFirstName;
       if (_isMale.equals("true"))
-        isMale         = true;
-      userAge          = _userAge;
-      userHeightInches = _userHeightInches;
-      userWeight       = _userWeight;
-      userBMR          = _userBMR;
-      userLifestyle    = _userLifestyle;
-      userID           = _userID;
-      userPassword     = _userPassword;
-      userDateJoined   = _userDateJoined;
+        isMale           = true;
+      userAge            = _userAge;
+      userHeightInches   = _userHeightInches;
+      userWeight         = _userWeight;
+      userStartingWeight = _userStartingWeight;
+      userBMR            = _userBMR;
+      userLifestyle      = _userLifestyle;
+      userID             = _userID;
+      userPassword       = _userPassword;
+      userDateJoined     = _userDateJoined;
     }
 
   public String  getName()          { return userFirstName;    }
@@ -41,10 +43,11 @@ public class UserAccount
     return userHeightFeet + "\'" + ByValUserHeightInches + "\"";
   } // End String getHeightCompleteString()
 
-  public int    getWeight()    { return userWeight;    }
-  public int    getLifestyle() { return userLifestyle; }
-  public String getUserID()    { return userID;        }
-  public String getPassword()  { return userPassword;  }
+  public int    getWeight()         { return userWeight;         }
+  public int    getStartingWeight() { return userStartingWeight; }
+  public int    getLifestyle()      { return userLifestyle;      }
+  public String getUserID()         { return userID;             }
+  public String getPassword()       { return userPassword;       }
   public static String getLifestyleText(int _lifestyleIndex)
   {
     if (_lifestyleIndex == 1)
@@ -92,4 +95,6 @@ public class UserAccount
   public void setHeight(int _newProfileHeight) { userHeightInches = _newProfileHeight; }
   public void setWeight(int _newProfileWeight) { userWeight       = _newProfileWeight; }
   public void setLifestyle(int _newLifestyle)  { userLifestyle    = _newLifestyle;     }
+  public void setUsername(String _newUsername) { userID           = _newUsername;      }
+  public void setPassword(String _newPassword) { userPassword     = _newPassword;      }
 }
