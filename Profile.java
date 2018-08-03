@@ -91,16 +91,21 @@ public class Profile
                 System.out.print("\n\n\n-----------------------------------\n\t" + currentUser.getName() + "\'s Statistics"
                   + "\n-----------------------------------");
 
-                //// TODO: Create a new class. One that passes variables for standard statistics (1), and another for updated weight (2)
+                //// TO DO: Create a new class. One that passes variables for standard statistics (1), and another for updated weight (2)
                 String userGenderString = "";
                 if (currentUser.getGender())
                   userGenderString = "true";
                 else
                   userGenderString = "false";
 
-                UserProgress userStatistics = new UserProgress(currentUser.getName(), userGenderString, currentUser.getAge(), currentUser.getHeightInches(),
-                  currentUser.getWeight(), currentUser.getStartingWeight(), currentUser.getBMR(), currentUser.getLifestyle(), currentUser.getUserID(), currentUser.getPassword() , currentUser.getDateJoined(), newProfileWeight);
-                System.out.println(userStatistics.getName());
+                UserProgress userStatistics = new UserProgress(currentUser.getName(), userGenderString, currentUser.getAge(),
+                  currentUser.getHeightInches(), currentUser.getWeight(), currentUser.getStartingWeight(), currentUser.getBMR(),
+                  currentUser.getLifestyle(), currentUser.getUserID(), currentUser.getPassword() , currentUser.getDateJoined());
+
+
+                userStatistics.setNewWeight(newProfileWeight);
+
+                userStatistics.recalcBMR();
 
 
               } // End if User correctly confirmed weight

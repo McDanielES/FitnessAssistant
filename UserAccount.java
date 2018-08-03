@@ -64,14 +64,14 @@ public class UserAccount
       return "Error";
   }
 
-  public DateRecord getDateJoined() { return userDateJoined; }
-  public long   getJoined()          { return userDateJoined.getUserJoined(); }
-  public String getJoinedDayOfWeek() { return userDateJoined.getDayOfWeek();  }
-  public String getJoinedMonth()     { return userDateJoined.getUserMonth();  }
-  public String getJoinedDay()       { return userDateJoined.getUserDay();    }
-  public String getJoinedYear()      { return userDateJoined.getUserYear();   }
-  public Long   getLastLogin()       { return userDateJoined.getLastLogin();  }
-  public String getJoinedFullPrint()
+  public DateRecord getDateJoined()      { return userDateJoined; }
+  public long       getJoined()          { return userDateJoined.getUserJoined(); }
+  public String     getJoinedDayOfWeek() { return userDateJoined.getDayOfWeek();  }
+  public String     getJoinedMonth()     { return userDateJoined.getUserMonth();  }
+  public String     getJoinedDay()       { return userDateJoined.getUserDay();    }
+  public String     getJoinedYear()      { return userDateJoined.getUserYear();   }
+  public Long       getLastLogin()       { return userDateJoined.getLastLogin();  }
+  public String     getJoinedFullPrint()
   {
     return getJoinedDayOfWeek() + " " + getJoinedMonth() + "/" + getJoinedDay() + "/" + getJoinedYear();
   } // end String getJoinedFullPrint
