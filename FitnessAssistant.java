@@ -25,17 +25,17 @@ public class FitnessAssistant
       do
       {
         // Determine if user has previously established an account
-        System.out.print("\n_________________________________\nWelcome to the Fitness Assistant!\n\t-----------------\n\t|   Main Menu   |\n\t-----------------\n"
-          + "Do you have an existing account?\nType Y/n to login or QUIT to exit: ");
+        System.out.print("\n_________________________________\nWelcome to the Fitness Assistant!\n\n\t-----------------\n\t|   Main Menu   |\n\t-----------------\n\n\n"
+          + "Do you have an existing account?\n\nType Y/n to login or QUIT to exit: ");
         char hasAccount;
         hasAccount = '0';
         Scanner userInput = new Scanner(System.in);
         hasAccount = userInput.next().charAt(0);
 
-        if(hasAccount == 'Q' || hasAccount == 'q')
+        if (hasAccount == 'Q' || hasAccount == 'q')
         {
           userContinue = false;
-          System.out.print("\n\n\tThank you for using The Fitness Assistant!\n\tWritten by Eric S McDaniel, July 2018.\n\n");
+          System.out.print("\n\n\tThank you for using The Fitness Assistant!\n\tWritten by Eric S McDaniel, July-August 2018.\n\n");
         }
         else
         {
@@ -155,12 +155,13 @@ public class FitnessAssistant
                 System.out.print("\t\tInvalid input. Please try again.\n\tWhat is your weight? ");
               }
             } while (!validUserWeight);
+            int userStartingWeight = userWeight;
             double userBMR = -1;
 
             // Determine user's lifestyle
-            System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: Sedentary (little or no exercise)\n\t\tOption 2: Lightly active (light exercise/sports 1-3 days/week)"
-              + "\n\t\tOption 3: Moderately active (moderate exercise/sports 3-5 days/week)\n\t\tOption 4: Very active (hard exercise/sports 6-7 days a week)"
-              + "\n\t\tOption 5: Extra active (very hard exercise/sports & physical job or 2x training)"
+            System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: " + UserAccount.getLifestyleText(1) + "\n\t\tOption 2: "
+              + UserAccount.getLifestyleText(2) + "\n\t\tOption 3: " + UserAccount.getLifestyleText(3) + "\n\t\tOption 4: "
+              + UserAccount.getLifestyleText(4) + "\n\t\tOption 5: " + UserAccount.getLifestyleText(5)
               + "\n\t\t---------------------------------------------------------------------\n\tLifestyle option (1-5): ");
             boolean validLifestyleRange = false;
             int userLifestyle = 0;
@@ -226,7 +227,7 @@ public class FitnessAssistant
 
             // Create object of class UserAccount, add it to the ArrayList, and method updateProfileDatabase writes the database file with new info.
             UserAccount newProfileCreate = new UserAccount(userFirstName, isMale, userAge, userHeightInches,
-            userWeight, userBMR, userLifestyle, userID, userPassword, userDateJoined);
+              userWeight, userStartingWeight, userBMR, userLifestyle, userID, userPassword, userDateJoined);
             UserCollection.add(newProfileCreate);
             userDatabase.updateProfileDatabase();
 
@@ -377,11 +378,14 @@ public class FitnessAssistant
                   UserCollection.get(userProfileIndex).setLastLogin(System.currentTimeMillis());
                   userDatabase.updateProfileDatabase();
                   System.out.print(currentUser.initialWelcomeMenu());
-                  currentUser.start();
+
+                  // Begin logged in profile menu
+                  if (currentUser.start())
+                    userContinue = true;
+                  else
+                  userContinue = false; // End program
 
 
-                  // End program
-                  userContinue = false;
                   System.out.print("\n");
                 }                  // End PROGRAM
               }                    // End userProfileIndex = -1 (Where no username matched input)
