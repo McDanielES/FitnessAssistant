@@ -98,14 +98,14 @@ public class Profile
                 else
                   userGenderString = "false";
 
-                UserProgress userStatistics = new UserProgress(currentUser.getName(), userGenderString, currentUser.getAge(),
-                  currentUser.getHeightInches(), currentUser.getWeight(), currentUser.getStartingWeight(), currentUser.getBMR(),
-                  currentUser.getLifestyle(), currentUser.getUserID(), currentUser.getPassword() , currentUser.getDateJoined());
-
-
-                userStatistics.setNewWeight(newProfileWeight);
-
-                userStatistics.recalcBMR();
+                // UserProgress userStatistics = new UserProgress(currentUser.getName(), userGenderString, currentUser.getAge(),
+                //   currentUser.getHeightInches(), currentUser.getWeight(), currentUser.getStartingWeight(), currentUser.getBMR(),
+                //   currentUser.getLifestyle(), currentUser.getUserID(), currentUser.getPassword() , currentUser.getDateJoined());
+                //
+                //
+                // userStatistics.setNewWeight(newProfileWeight);
+                //
+                // userStatistics.recalcBMR();
 
 
               } // End if User correctly confirmed weight

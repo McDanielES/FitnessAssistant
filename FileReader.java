@@ -7,17 +7,10 @@ import java.io.PrintWriter;
 public class FileReader extends File
 {
   private String     filename;
-  private String     userFirstName;
-  private String     isMale = "false"; // Reads as String, will convert to boolean
-  private int        userAge;
-  private int        userHeightInches;
-  private int        userWeight;
-  private int        userStartingWeight;
-  private double     userBMR;
-  private int        userLifestyle;
-  private String     userID;
-  private String     userPassword;
-  private DateRecord userDateJoined;
+
+
+
+
   private ArrayList<UserAccount> UserCollection;
 
   FileReader(String _filename, ArrayList<UserAccount> _UserCollection)
@@ -34,29 +27,31 @@ public class FileReader extends File
 
     while (databaselineReader.hasNextLine())
     {
-      userFirstName      = databaselineReader.nextLine();
+      UserAccount completeUserRecord = new UserAccount();
+      completeUserRecord.setName(databaselineReader.nextLine());
       if (databaselineReader.nextLine().equals("true"))
-        isMale = "true";
-      userAge            = Integer.parseInt(databaselineReader.nextLine());
-      userHeightInches   = Integer.parseInt(databaselineReader.nextLine());
-      userWeight         = Integer.parseInt(databaselineReader.nextLine());
-      userStartingWeight = Integer.parseInt(databaselineReader.nextLine());
-      userBMR            = Double.parseDouble(databaselineReader.nextLine());
-      userLifestyle      = Integer.parseInt(databaselineReader.nextLine());
-      userID             = databaselineReader.nextLine();
-      userPassword       = databaselineReader.nextLine();
-      tempReaderLong     = Long.parseLong(databaselineReader.nextLine());
+        completeUserRecord.setGender(true);
+      else
+        completeUserRecord.setGender(false);
+      completeUserRecord.setAge(Integer.parseInt(databaselineReader.nextLine()));
+      completeUserRecord.setHeight(Integer.parseInt(databaselineReader.nextLine()));
+      completeUserRecord.setWeight(Integer.parseInt(databaselineReader.nextLine()));
+      completeUserRecord.setStartingWeight(Integer.parseInt(databaselineReader.nextLine()));
+      completeUserRecord.setBMR(Double.parseDouble(databaselineReader.nextLine()));
+      completeUserRecord.setLifestyle(Integer.parseInt(databaselineReader.nextLine()));
+      completeUserRecord.setUsername(databaselineReader.nextLine());
+      completeUserRecord.setPassword(databaselineReader.nextLine());
 
-      userDateJoined = new DateRecord(tempReaderLong);
+      tempReaderLong = Long.parseLong(databaselineReader.nextLine());
+      DateRecord userDateJoined = new DateRecord(tempReaderLong);
       userDateJoined.setDayOfWeek(databaselineReader.nextLine());
       userDateJoined.setUserMonth(databaselineReader.nextLine());
       userDateJoined.setUserDay(databaselineReader.nextLine());
       userDateJoined.setUserYear(databaselineReader.nextLine());
       userDateJoined.setLastLogin(Long.parseLong(databaselineReader.nextLine()));
+      completeUserRecord.setDateJoined(userDateJoined);
 
       // Instantiate objects of class UserAccount and append to arraylist
-      UserAccount completeUserRecord = new UserAccount(userFirstName, isMale, userAge, userHeightInches,
-          userWeight, userStartingWeight, userBMR, userLifestyle, userID, userPassword, userDateJoined);
       UserCollection.add(completeUserRecord);
     }
     databaselineReader.close();
