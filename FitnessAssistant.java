@@ -50,13 +50,14 @@ public class FitnessAssistant
           // Establishes account if none exists
           if (!hasAccountVerified(hasAccount))
           {
+            UserAccount newProfileCreate = new UserAccount();
+
             System.out.print("\nLet's establish an account for yourself.\nThis way I can calculate your measurables and track your progress.\n\tWhat is your name? ");
-            String userFirstName = userInput.next();
+            newProfileCreate.setName(userInput.next());
 
             // Get users' gender.
             boolean validGender = false;
             String userGender = "";
-            String isMale = "true";
             while (!validGender)
             {
               System.out.print("\tWhat gender are you? Type M/F: ");
@@ -67,9 +68,9 @@ public class FitnessAssistant
                 validGender = true;
               // If user entered M/m/F/f, then determin gender.
               if (userGender.charAt(0) == 'M' || userGender.charAt(0) == 'm')
-                isMale = "true";
+                newProfileCreate.setGender(true);
               else
-                isMale = "false";
+                newProfileCreate.setGender(false);
             }
 
             // Get users' age.
@@ -91,6 +92,7 @@ public class FitnessAssistant
                 System.out.print("\t\tInvalid input. Please try again.\n\tWhat is your age? ");
               }
             } while (!validUserAge);
+            newProfileCreate.setAge(userAge);
 
             // Get users' height. Will convert feet/inches to total inches.
             System.out.print("\tWhat is your height?\n\t\tFeet: ");
@@ -135,6 +137,7 @@ public class FitnessAssistant
             } while (!validUserHeight);
             System.out.print("\t\t------------------------------\n\t\t" + userHeightFeet + "\'" + userHeightInches + "\" makes you ");
             userHeightInches = (userHeightFeet * 12) + userHeightInches;
+            newProfileCreate.setHeight(userHeightInches);
 
             // Get users' weight.
             System.out.print(userHeightInches + " inches tall.\n\tWhat is your weight? ");
@@ -155,8 +158,10 @@ public class FitnessAssistant
                 System.out.print("\t\tInvalid input. Please try again.\n\tWhat is your weight? ");
               }
             } while (!validUserWeight);
-            int userStartingWeight = userWeight;
-            double userBMR = -1;
+            newProfileCreate.setWeight(userWeight);
+            newProfileCreate.setStartingWeight(userWeight);
+            newProfileCreate.setBMR(-1.0);
+
 
             // Determine user's lifestyle
             System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: " + UserAccount.getLifestyleText(1) + "\n\t\tOption 2: "
@@ -164,7 +169,7 @@ public class FitnessAssistant
               + UserAccount.getLifestyleText(4) + "\n\t\tOption 5: " + UserAccount.getLifestyleText(5)
               + "\n\t\t---------------------------------------------------------------------\n\tLifestyle option (1-5): ");
             boolean validLifestyleRange = false;
-            int userLifestyle = 0;
+            int userLifestyle = -1;
             do
             {
               try
@@ -180,13 +185,13 @@ public class FitnessAssistant
                 System.out.print("\t\tInvalid input. Please try again.\n\tLifestyle option (1-5): ");
               }
             } while (!validLifestyleRange);
+            newProfileCreate.setLifestyle(userLifestyle);
 
             // Create username and make sure it isn't found in the database
             System.out.print("\nExcellent! Your profile has been created.\nLastly, let's create a username and password for when you return.\n\n");
             Random IDGenerator = new Random();
-            int userAccountIDNumber = 0;
+            int userAccountIDNumber = -1;
             String userID = "";
-            String tempID = "";
             int collectionCounter;
             boolean linearSearchMatchFound = false;
             do
@@ -194,13 +199,13 @@ public class FitnessAssistant
               // A userID is generating by concatenating the name with a random three-digit number.
               linearSearchMatchFound = false;
               collectionCounter = 0;
-              userAccountIDNumber = IDGenerator.nextInt(599) + 101;
-              tempID = String.format("%s%d", userFirstName, userAccountIDNumber);
+              userAccountIDNumber = IDGenerator.nextInt(799) + 101;
+              userID = String.format("%s%d", newProfileCreate.getName(), userAccountIDNumber);
 
               // A Linear search of if the generated username is found in the records.
               while (collectionCounter < UserCollection.size())
               {
-                if (UserCollection.get(collectionCounter).getUserID().toUpperCase().equalsIgnoreCase(tempID.toUpperCase()))
+                if (UserCollection.get(collectionCounter).getUserID().toUpperCase().equalsIgnoreCase(userID.toUpperCase()))
                 {
                   collectionCounter = UserCollection.size();
                   linearSearchMatchFound = true;
@@ -208,14 +213,14 @@ public class FitnessAssistant
                 ++collectionCounter;
               }
             } while (linearSearchMatchFound);
-            userID = tempID;
+            newProfileCreate.setUsername(userID);
 
             // Create the user's password
             System.out.print("\tYour auto generated username is \n\t-------------------------------\n\t\t  "
               + userID + "\n\t-------------------------------\n\tTry not to forget it!\n\n\tProvide a password: ");
             String userPassword = userInputTemp.next();
-            System.out.print("\t-------------------------------\n\t\t|| Username: " + userID + " \n\t\t|| Password: " + userPassword
-              + "\n\t-------------------------------\n\nThanks for creating an account, " + userFirstName + "!\n");
+            System.out.print("\t-------------------------------\n\t\t|| Username: " + newProfileCreate.getUserID() + " \n\t\t|| Password: " + newProfileCreate.getPassword()
+              + "\n\t-------------------------------\n\nThanks for creating an account, " + newProfileCreate.getName() + "!\n");
 
             // Format the date
             DateRecord userDateJoined = new DateRecord(System.currentTimeMillis());
@@ -224,10 +229,10 @@ public class FitnessAssistant
             userDateJoined.setUserDay(String.format("%td", userDateJoined));
             userDateJoined.setUserYear(String.format("%ty", userDateJoined));
             userDateJoined.setLastLogin(System.currentTimeMillis());
+            newProfileCreate.setDateJoined(userDateJoined);
 
-            // Create object of class UserAccount, add it to the ArrayList, and method updateProfileDatabase writes the database file with new info.
-            UserAccount newProfileCreate = new UserAccount(userFirstName, isMale, userAge, userHeightInches,
-              userWeight, userStartingWeight, userBMR, userLifestyle, userID, userPassword, userDateJoined);
+            // Add object to the ArrayList, and method updateProfileDatabase writes the database file with new info.
+            // TODO Edit comment above
             UserCollection.add(newProfileCreate);
             userDatabase.updateProfileDatabase();
 

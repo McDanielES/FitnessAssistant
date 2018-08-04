@@ -14,23 +14,6 @@ public class UserAccount
 
   UserAccount(){}
 
-  UserAccount(String _userFirstName, String _isMale, int _userAge, int _userHeightInches, int _userWeight,
-    int _userStartingWeight, double _userBMR, int _userLifestyle, String _userID, String _userPassword, DateRecord _userDateJoined)
-    {
-      userFirstName      = _userFirstName;
-      if (_isMale.equals("true"))
-        isMale           = true;
-      userAge            = _userAge;
-      userHeightInches   = _userHeightInches;
-      userWeight         = _userWeight;
-      userStartingWeight = _userStartingWeight;
-      userBMR            = _userBMR;
-      userLifestyle      = _userLifestyle;
-      userID             = _userID;
-      userPassword       = _userPassword;
-      userDateJoined     = _userDateJoined;
-    }
-
   public String  getName()          { return userFirstName;    }
   public boolean getGender()        { return isMale;           }
   public int     getAge()           { return userAge;          }
@@ -64,13 +47,14 @@ public class UserAccount
       return "Error";
   }
 
-  public long   getJoined()          { return userDateJoined.getUserJoined(); }
-  public String getJoinedDayOfWeek() { return userDateJoined.getDayOfWeek();  }
-  public String getJoinedMonth()     { return userDateJoined.getUserMonth();  }
-  public String getJoinedDay()       { return userDateJoined.getUserDay();    }
-  public String getJoinedYear()      { return userDateJoined.getUserYear();   }
-  public Long   getLastLogin()       { return userDateJoined.getLastLogin();  }
-  public String getJoinedFullPrint()
+  public DateRecord getDateJoined()      { return userDateJoined; }
+  public long       getJoined()          { return userDateJoined.getUserJoined(); }
+  public String     getJoinedDayOfWeek() { return userDateJoined.getDayOfWeek();  }
+  public String     getJoinedMonth()     { return userDateJoined.getUserMonth();  }
+  public String     getJoinedDay()       { return userDateJoined.getUserDay();    }
+  public String     getJoinedYear()      { return userDateJoined.getUserYear();   }
+  public Long       getLastLogin()       { return userDateJoined.getLastLogin();  }
+  public String     getJoinedFullPrint()
   {
     return getJoinedDayOfWeek() + " " + getJoinedMonth() + "/" + getJoinedDay() + "/" + getJoinedYear();
   } // end String getJoinedFullPrint
@@ -90,11 +74,15 @@ public class UserAccount
     return userBMR;
   } // End double getBMR()
 
-  public void setName(String _newProfileName)  { userFirstName    = _newProfileName;   }
-  public void setAge(int _newProfileAge)       { userAge          = _newProfileAge;    }
-  public void setHeight(int _newProfileHeight) { userHeightInches = _newProfileHeight; }
-  public void setWeight(int _newProfileWeight) { userWeight       = _newProfileWeight; }
-  public void setLifestyle(int _newLifestyle)  { userLifestyle    = _newLifestyle;     }
-  public void setUsername(String _newUsername) { userID           = _newUsername;      }
-  public void setPassword(String _newPassword) { userPassword     = _newPassword;      }
+  public void setName(String _setProfileName)  { userFirstName      = _setProfileName;   }
+  public void setGender(boolean _setGender)    { isMale             = _setGender;        }
+  public void setAge(int _setProfileAge)       { userAge            = _setProfileAge;    }
+  public void setHeight(int _setProfileHeight) { userHeightInches   = _setProfileHeight; }
+  public void setWeight(int _setProfileWeight) { userWeight         = _setProfileWeight; }
+  public void setStartingWeight(int _setSW)    { userStartingWeight = _setSW;            }
+  public void setBMR(double _setUserBMR)       { userBMR            = _setUserBMR;       }
+  public void setLifestyle(int _setLifestyle)  { userLifestyle      = _setLifestyle;     }
+  public void setUsername(String _setUsername) { userID             = _setUsername;      }
+  public void setPassword(String _setPassword) { userPassword       = _setPassword;      }
+  public void setDateJoined(DateRecord _setDR) { userDateJoined     = _setDR;            }
 }
