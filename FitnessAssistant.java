@@ -18,15 +18,17 @@ public class FitnessAssistant
       System.out.print("Error: User Profiles could not be loaded. Please contact the developer to resolve this issue.\n");
     else
     {
-      // Read from the file and store user profiles into memory. Yes this isn't practical. This database doesn't have ten million accounts however.
+      // Read from the file and store user profiles into memory. Yes this isn't practical.
+      //This database doesn't have ten million accounts however.
       userDatabase.initialDataLoad();
       boolean userContinue = true;
 
       do
       {
         // Determine if user has previously established an account
-        System.out.print("\n_________________________________\nWelcome to the Fitness Assistant!\n\n\t-----------------\n\t|   Main Menu   |\n\t-----------------\n\n\n"
-          + "Do you have an existing account?\n\nType Y/n to login or QUIT to exit: ");
+        System.out.print("\n_________________________________\nWelcome to the Fitness Assistant!\n\n\t-----------------\n"
+          + "\t|   Main Menu   |\n\t-----------------\n\n\nDo you have an existing account?\n\nType Y/n to login "
+          + "or QUIT to exit: ");
         char hasAccount;
         hasAccount = '0';
         Scanner userInput = new Scanner(System.in);
@@ -35,7 +37,8 @@ public class FitnessAssistant
         if (hasAccount == 'Q' || hasAccount == 'q')
         {
           userContinue = false;
-          System.out.print("\n\n\tThank you for using The Fitness Assistant!\n\tWritten by Eric S McDaniel, July-August 2018.\n\n");
+          System.out.print("\n\n\tThank you for using The Fitness Assistant!\n"
+            + "\tWritten by Eric S McDaniel, July-August 2018.\n\n");
         }
         else
         {
@@ -52,7 +55,8 @@ public class FitnessAssistant
           {
             UserAccount newProfileCreate = new UserAccount();
 
-            System.out.print("\nLet's establish an account for yourself.\nThis way I can calculate your measurables and track your progress.\n\tWhat is your name? ");
+            System.out.print("\nLet's establish an account for yourself.\nThis way I can calculate your measurables and "
+              + "track your progress.\n\tWhat is your name? ");
             newProfileCreate.setName(userInput.next());
 
             // Get users' gender.
@@ -62,7 +66,8 @@ public class FitnessAssistant
             {
               System.out.print("\tWhat gender are you? Type M/F: ");
               userGender = userInputTemp.next();
-              if (!(userGender.charAt(0) == 'M' || userGender.charAt(0) == 'm' || userGender.charAt(0) == 'F' || userGender.charAt(0) == 'f'))
+              if (!(userGender.charAt(0) == 'M' || userGender.charAt(0) == 'm' || userGender.charAt(0) == 'F'
+                || userGender.charAt(0) == 'f'))
                 System.out.print("\t\t" + userGender + "? Sorry, please revise your input.\n");
               else
                 validGender = true;
@@ -83,7 +88,8 @@ public class FitnessAssistant
               {
                 userAge = Integer.parseInt(userInputTemp.next());
                 if (userAge <= 2 || userAge > 120)
-                  System.out.print("\t\tYou seriously aren't " + userAge + " years old. Let's try again.\n\tWhat is your age? ");
+                  System.out.print("\t\tYou seriously aren't " + userAge + " years old. Let's try again.\n"
+                    + "\tWhat is your age? ");
                 else
                   validUserAge = true;
               }
@@ -105,7 +111,8 @@ public class FitnessAssistant
               {
                 userHeightFeet = Integer.parseInt(userInputTemp.next());
                 if (userHeightFeet <= 2 || userHeightFeet > 12)
-                  System.out.print("\t\t\tYou seriously aren't " + userHeightFeet + " feet \"tall\". Let's try again.\n\t\tYour height in feet? ");
+                  System.out.print("\t\t\tYou seriously aren't " + userHeightFeet + " feet \"tall\". Let's try again.\n"
+                    + "\t\tYour height in feet? ");
                 else
                   validUserHeight = true;
               }
@@ -123,9 +130,11 @@ public class FitnessAssistant
               {
                 userHeightInches = Integer.parseInt(userInputTemp.next());
                 if (userHeightInches < 0)
-                  System.out.print("\t\t\tYou seriously aren't " + userHeightInches + " inches \"tall\". Let's try again.\n\t\tInches above " + userHeightFeet + " feet? ");
+                  System.out.print("\t\t\tYou seriously aren't " + userHeightInches + " inches \"tall\". Let's try again.\n"
+                    + "\t\tInches above " + userHeightFeet + " feet? ");
                 else if (userHeightInches >= 12)
-                  System.out.print("\t\t\tWell, there are only 12 inches in a foot. Try again.\n\t\tInches above " + userHeightFeet + " feet? ");
+                  System.out.print("\t\t\tWell, there are only 12 inches in a foot. Try again.\n\t\tInches above "
+                    + userHeightFeet + " feet? ");
                 else
                   validUserHeight = true;
               }
@@ -135,7 +144,8 @@ public class FitnessAssistant
               }
 
             } while (!validUserHeight);
-            System.out.print("\t\t------------------------------\n\t\t" + userHeightFeet + "\'" + userHeightInches + "\" makes you ");
+            System.out.print("\t\t------------------------------\n\t\t" + userHeightFeet + "\'" + userHeightInches
+              + "\" makes you ");
             userHeightInches = (userHeightFeet * 12) + userHeightInches;
             newProfileCreate.setHeight(userHeightInches);
 
@@ -149,7 +159,8 @@ public class FitnessAssistant
               {
                 userWeight = Integer.parseInt(userInputTemp.next());
                 if (userWeight < 40 || userWeight > 600)
-                  System.out.print("\t\tYou seriously aren't " + userWeight + "lbs. Let's try again.\n\tWhat is your weight? ");
+                  System.out.print("\t\tYou seriously aren't " + userWeight + "lbs. Let's try again.\n"
+                    + "\tWhat is your weight? ");
                 else
                   validUserWeight = true;
               }
@@ -164,10 +175,11 @@ public class FitnessAssistant
 
 
             // Determine user's lifestyle
-            System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: " + UserAccount.getLifestyleText(1) + "\n\t\tOption 2: "
-              + UserAccount.getLifestyleText(2) + "\n\t\tOption 3: " + UserAccount.getLifestyleText(3) + "\n\t\tOption 4: "
-              + UserAccount.getLifestyleText(4) + "\n\t\tOption 5: " + UserAccount.getLifestyleText(5)
+            System.out.print("\tHow active is your lifestyle?\n\t\tOption 1: " + UserAccount.getLifestyleText(1)
+              + "\n\t\tOption 2: " + UserAccount.getLifestyleText(2) + "\n\t\tOption 3: " + UserAccount.getLifestyleText(3)
+              + "\n\t\tOption 4: " + UserAccount.getLifestyleText(4) + "\n\t\tOption 5: " + UserAccount.getLifestyleText(5)
               + "\n\t\t---------------------------------------------------------------------\n\tLifestyle option (1-5): ");
+
             boolean validLifestyleRange = false;
             int userLifestyle = -1;
             do
@@ -188,7 +200,8 @@ public class FitnessAssistant
             newProfileCreate.setLifestyle(userLifestyle);
 
             // Create username and make sure it isn't found in the database
-            System.out.print("\nExcellent! Your profile has been created.\nLastly, let's create a username and password for when you return.\n\n");
+            System.out.print("\nExcellent! Your profile has been created.\nLastly, let's create a username and password for "
+              + "when you return.\n\n");
             Random IDGenerator = new Random();
             int userAccountIDNumber = -1;
             String userID = "";
@@ -228,12 +241,14 @@ public class FitnessAssistant
               if (userPassword.equals(userPasswordConfirm))
                 validPassword = false;
               else
-                System.out.print("\n\t\t---------------------------\n\t\tPasswords did not match!\n\t\tPlease try again.\n\n\tProvide a password: ");
+                System.out.print("\n\t\t---------------------------\n\t\tPasswords did not match!\n\t\tPlease try again.\n"
+                  + "\n\tProvide a password: ");
             } while (validPassword);
             newProfileCreate.setPassword(userPassword);
 
-            System.out.print("\t-------------------------------\n\t\t|| Username: " + newProfileCreate.getUserID() + " \n\t\t|| Password: " + newProfileCreate.getPassword()
-              + "\n\t-------------------------------\n\n\nThanks for creating an account, " + newProfileCreate.getName() + "!\n");
+            System.out.print("\t-------------------------------\n\t\t|| Username: " + newProfileCreate.getUserID() + " \n"
+              + "\t\t|| Password: " + newProfileCreate.getPassword() + "\n\t-------------------------------\n\n\n"
+              + "Thanks for creating an account, " + newProfileCreate.getName() + "!\n");
 
             // Format the date
             DateRecord userDateJoined = new DateRecord(System.currentTimeMillis());
@@ -257,18 +272,21 @@ public class FitnessAssistant
           // Opposite case where if the user has an account and input "y" in the beginning.
           else
           {
-            System.out.print("\nPlease login below. If you cannot remember your username or\n     password, please type HELP for the recovery menu.\n\n\t|| Username: ");
+            System.out.print("\nPlease login below. If you cannot remember your username or\n     password, please type "
+              + "HELP for the recovery menu.\n\n\t|| Username: ");
             String username = userInput.next();
             // boolean userContinue = "";
 
             if (username.equalsIgnoreCase("help"))
             {
-              System.out.print("\n\t   --------------------\n\t   | Profile Recovery |\n\t   --------------------\n\tWhat is your first name? ");
+              System.out.print("\n\t   --------------------\n\t   | Profile Recovery |\n\t   --------------------\n\tWhat "
+                + "is your first name? ");
               username = userInput.next();
               if (!FindNameInDatabase(username, UserCollection))
               {
                 // Terminates program is no matching first name is ever found.
-                System.out.print("\n\nSorry, there are no accounts with the name " + username + ".\nPlease either confirm your spelling or create a new account.\n");
+                System.out.print("\n\nSorry, there are no accounts with the name " + username + ".\nPlease either confirm "
+                  + "your spelling or create a new account.\n");
                 userContinue = continueProgram(userInput);
               }
               else
@@ -293,8 +311,9 @@ public class FitnessAssistant
                 if (!FindAgeInDatabase(username, userAgeRecovery, UserCollection))
                 {
                   // If the user isn't within three years of age, recovery is impossible.
-                  System.out.print("\nSorry, there are no profiles named " + username + " who are reasonably close to " + userAgeRecovery + " years old.\n"
-                    + "Please either contact the developer or create a new profile to get started.\n");
+                  System.out.print("\nSorry, there are no profiles named " + username + " who are reasonably close to "
+                    + userAgeRecovery + " years old.\nPlease either contact the developer or create a new profile "
+                    + "to get started.\n");
                   userContinue = continueProgram(userInput);
                 }
                 else
@@ -327,7 +346,8 @@ public class FitnessAssistant
                     }
                     catch (NumberFormatException nfe)
                     {
-                      System.out.print("\t\t\tInvalid input. Please try again.\n\t\tInches above " + userHeightFeetRecovery + " feet? ");
+                      System.out.print("\t\t\tInvalid input. Please try again.\n\t\tInches above " + userHeightFeetRecovery
+                      + " feet? ");
                     }
                   } while (!validUserHeightRecovery);
                   System.out.print("\n");
@@ -335,13 +355,15 @@ public class FitnessAssistant
                   int userArrayListIndex = FindHeightInDatabase(username, userHeightInchesRecovery, UserCollection);
                   if (userArrayListIndex >= 0)
                   {
-                    System.out.print("\t-----------------------------\n\t|| Your Username is: " + UserCollection.get(userArrayListIndex).getUserID()
-                      + "\n\t|| Your Password is: " + UserCollection.get(userArrayListIndex).getPassword() + "\n\t-----------------------------\n");
+                    System.out.print("\t-----------------------------\n\t|| Your Username is: "
+                      + UserCollection.get(userArrayListIndex).getUserID() + "\n\t|| Your Password is: "
+                      + UserCollection.get(userArrayListIndex).getPassword() + "\n\t-----------------------------\n");
                     userContinue = continueProgram(userInput);
                   }
                   else
                   {
-                    System.out.print("\nSorry, there is no profile that matches that description.\nPlease either contact the developer or create a new account.\n");
+                    System.out.print("\nSorry, there is no profile that matches that description.\nPlease either contact "
+                      + "the developer or create a new account.\n");
                     userContinue = continueProgram(userInput);
                   }
                 }   // End FindAgeInDatabase()
@@ -357,7 +379,8 @@ public class FitnessAssistant
               }
               if (userProfileIndex < 0)
               {
-                System.out.print("\nSorry, there is no profile with the username " + username + ".\nPlease confirm your spelling or type HELP to access Profile Recovery.\n\n");
+                System.out.print("\nSorry, there is no profile with the username " + username + ".\nPlease confirm your "
+                  + "spelling or type HELP to access Profile Recovery.\n\n");
                 userContinue = continueProgram(userInput);
               }
               else
@@ -371,15 +394,16 @@ public class FitnessAssistant
                   if (!password.equals(UserCollection.get(userProfileIndex).getPassword()))
                   {
                     --incorrectPasswordCounter;
-                    System.out.print("\t\tInvalid password. Please check your spelling and try again.\n\t\tAttempts remaining: " + incorrectPasswordCounter + "\n");
+                    System.out.print("\t\tInvalid password. Please check your spelling and try again.\n\t\tAttempts "
+                      + "remaining: " + incorrectPasswordCounter + "\n");
                   }
                   else
                     validPassword = true;
                 } while ((!validPassword) && (incorrectPasswordCounter > 0));
                 if (incorrectPasswordCounter <= 0)
                 {
-                  System.out.print("\t-------------------------------------------------------------------\n\nYou have repeatedly "
-                    + "provided the incorrect password.\nPlease use the recovery menu to recover your account.\n");
+                  System.out.print("\t-------------------------------------------------------------------\n\nYou have "
+                    + "repeatedly provided the incorrect password.\nPlease use the recovery menu to recover your account.\n");
                   userContinue = continueProgram(userInput);
                 }
                 else // Password was valid
@@ -390,7 +414,8 @@ public class FitnessAssistant
 
                   // Collect last login before its overwritten, and create object to direct to Profile menu.
                   long lastLogin = UserCollection.get(userProfileIndex).getLastLogin();
-                  Profile currentUser = new Profile(UserCollection.get(userProfileIndex), lastLogin, userDatabase, userProfileIndex);
+                  Profile currentUser = new Profile(UserCollection.get(userProfileIndex),
+                    lastLogin, userDatabase, userProfileIndex);
 
                   // Reset last login, save to database, and present special "first time" Profile menu.
                   UserCollection.get(userProfileIndex).setLastLogin(System.currentTimeMillis());
@@ -453,7 +478,8 @@ public class FitnessAssistant
   {
     for (int i = 0; i < _UserCollection.size(); ++i)
     {
-      if (_UserCollection.get(i).getName().equalsIgnoreCase(_userFirstName) && (_UserCollection.get(i).getHeightInches() == _userHeightInchesRecovery))
+      if (_UserCollection.get(i).getName().equalsIgnoreCase(_userFirstName)
+        && (_UserCollection.get(i).getHeightInches() == _userHeightInchesRecovery))
         return i;
     }
     return -1;
@@ -468,7 +494,8 @@ public class FitnessAssistant
   public static boolean continueProgram(Scanner _userInput)
   {
     String userChoice = "";
-    System.out.print("\n\t-------------------------------------------\n\tWould you like to go back to the main menu?\n\tType Y to go back or N to quit. Y/n: ");
+    System.out.print("\n\t-------------------------------------------\n\tWould you like to go back to the main menu?\n"
+      + "\tType Y to go back or N to quit. Y/n: ");
     userChoice = _userInput.next();
     System.out.print("\t-------------------------------------------");
     if (userChoice.charAt(0) == 'Y' || userChoice.charAt(0) == 'y')
