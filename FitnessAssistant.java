@@ -214,13 +214,26 @@ public class FitnessAssistant
               }
             } while (linearSearchMatchFound);
             newProfileCreate.setUsername(userID);
+            System.out.print("\tYour auto generated username is \n\t-------------------------------\n\t\t  "
+            + userID + "\n\t-------------------------------\n\tTry not to forget it!\n\n\tProvide a password: ");
 
             // Create the user's password
-            System.out.print("\tYour auto generated username is \n\t-------------------------------\n\t\t  "
-              + userID + "\n\t-------------------------------\n\tTry not to forget it!\n\n\tProvide a password: ");
-            String userPassword = userInputTemp.next();
+            boolean validPassword = true;
+            String userPassword = "";
+            String userPasswordConfirm = "";
+            do {
+              userPassword = userInputTemp.next();
+              System.out.print("\tConfirm password: ");
+              userPasswordConfirm = userInputTemp.next();
+              if (userPassword.equals(userPasswordConfirm))
+                validPassword = false;
+              else
+                System.out.print("\n\t\t---------------------------\n\t\tPasswords did not match!\n\t\tPlease try again.\n\n\tProvide a password: ");
+            } while (validPassword);
+            newProfileCreate.setPassword(userPassword);
+
             System.out.print("\t-------------------------------\n\t\t|| Username: " + newProfileCreate.getUserID() + " \n\t\t|| Password: " + newProfileCreate.getPassword()
-              + "\n\t-------------------------------\n\nThanks for creating an account, " + newProfileCreate.getName() + "!\n");
+              + "\n\t-------------------------------\n\n\nThanks for creating an account, " + newProfileCreate.getName() + "!\n");
 
             // Format the date
             DateRecord userDateJoined = new DateRecord(System.currentTimeMillis());
