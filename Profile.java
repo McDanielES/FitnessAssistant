@@ -78,34 +78,22 @@ public class Profile
               else
               {
                 FitnessAssistant.clearScreen();
+                System.out.print("-----------------------------------\n\t" + currentUser.getName() + "\'s Statistics"
+                  + "\n-----------------------------------");
                 if (newProfileWeight > currentUser.getWeight())
                 {
-                  System.out.print("\n--------------------------------\nUh oh! That's a gain of " + (newProfileWeight - currentUser.getWeight()) + " lbs!"
-                    + "\n--------------------------------");
+                  System.out.print("\n\n\t       Uh oh!\n\t       ------\n      That's a gain of " + (newProfileWeight - currentUser.getWeight()) + " lbs!\n\n");
                 }
                 else
                 {
-                  System.out.print("\n--------------------------------\nWoo hoo! That's a loss of " + (currentUser.getWeight() - newProfileWeight) + " lbs!"
-                    + "\n--------------------------------");
+                  System.out.print("\n\n\t     Woo hoo!\n\t     --------\n     That's a loss of " + (currentUser.getWeight() - newProfileWeight) + " lbs!\n\n");
                 }
-                System.out.print("\n\n\n-----------------------------------\n\t" + currentUser.getName() + "\'s Statistics"
-                  + "\n-----------------------------------");
 
-                //// TO DO: Create a new class. One that passes variables for standard statistics (1), and another for updated weight (2)
-                String userGenderString = "";
-                if (currentUser.getGender())
-                  userGenderString = "true";
-                else
-                  userGenderString = "false";
+                UserProgress Statistics = new UserProgress();
+                Statistics.setUser(currentUser);
+                Statistics.setNewWeight(newProfileWeight);
 
-                // UserProgress userStatistics = new UserProgress(currentUser.getName(), userGenderString, currentUser.getAge(),
-                //   currentUser.getHeightInches(), currentUser.getWeight(), currentUser.getStartingWeight(), currentUser.getBMR(),
-                //   currentUser.getLifestyle(), currentUser.getUserID(), currentUser.getPassword() , currentUser.getDateJoined());
-                //
-                //
-                // userStatistics.setNewWeight(newProfileWeight);
-                //
-                // userStatistics.recalcBMR();
+                Statistics.updatedBMRStart();  
 
 
               } // End if User correctly confirmed weight

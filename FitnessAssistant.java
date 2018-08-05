@@ -388,7 +388,7 @@ public class FitnessAssistant
                   if (currentUser.start())
                     userContinue = true;
                   else
-                  userContinue = false; // End program
+                    userContinue = false; // End program
 
 
                   System.out.print("\n");
