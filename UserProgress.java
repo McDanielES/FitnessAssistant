@@ -12,10 +12,14 @@ public class UserProgress
 
   public void updatedBMRStart()
   {
-    System.out.print("\n\t     _____________\n\t    | Progression |\n----------------------------------------\nWeight:\t\t" + currentUser.getWeight() + " lbs.   ⇨    " + getNewWeight() + " lbs.\n"
-      + "   ↳  Difference:   " + Math.abs(currentUser.getWeight() - getNewWeight()) + " lbs. \n\nSince Start:\t" + currentUser.getStartingWeight() + " lbs.   ⇨    " + getNewWeight() + " lbs.\n"
-      + "   ↳  Gross Difference:   " + Math.abs(currentUser.getStartingWeight() - getNewWeight()) + " lbs.\n\n\t\t/-----\\\nPercent Change:\t" + percentChange(currentUser.getWeight()) + "% " + direction(currentUser.getWeight())
-      + " from " + currentUser.getWeight() + " lbs.\nSince Start:\t" + percentChange(currentUser.getStartingWeight()) + "% " + direction(currentUser.getStartingWeight()) + " from " + currentUser.getStartingWeight() + " lbs.");
+    System.out.print("\n\t     _____________\n\t    | Progression |\n----------------------------------------\nWeight:\t\t"
+      + currentUser.getWeight() + " lbs.   ⇨    " + getNewWeight() + " lbs.\n   ↳  Difference:   "
+      + Math.abs(currentUser.getWeight() - getNewWeight()) + " lbs. \n\nSince Start:\t" + currentUser.getStartingWeight()
+      + " lbs.   ⇨    " + getNewWeight() + " lbs.\n   ↳  Gross Difference:   "
+      + Math.abs(currentUser.getStartingWeight() - getNewWeight()) + " lbs.\n\n\t\t/-----\\\nPercent Change:\t"
+      + percentChange(currentUser.getWeight()) + "% " + direction(currentUser.getWeight()) + " from "
+      + currentUser.getWeight() + " lbs.\nSince Start:\t" + percentChange(currentUser.getStartingWeight()) + "% "
+      + direction(currentUser.getStartingWeight()) + " from " + currentUser.getStartingWeight() + " lbs.");
 
   }
 
