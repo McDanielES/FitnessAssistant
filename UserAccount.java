@@ -63,9 +63,9 @@ public class UserAccount
   private void calculateBMR()
   {
     if (isMale)
-      userBMR = 66 + (6.23 * userWeight) + (12.7 * userHeightInches) - (6.8 * userAge);
+      userBMR = Math.round(66 + (6.23 * userWeight) + (12.7 * userHeightInches) - (6.8 * userAge));
     else
-      userBMR = 655 + (4.35 * userWeight) + (4.7 * userHeightInches) - (4.7 * userAge);
+      userBMR = Math.round(655 + (4.35 * userWeight) + (4.7 * userHeightInches) - (4.7 * userAge));
   } // End void calculateBMR()
 
   public double getBMR()

@@ -6,11 +6,7 @@ import java.io.PrintWriter;
 
 public class FileReader extends File
 {
-  private String     filename;
-
-
-
-
+  private String filename;
   private ArrayList<UserAccount> UserCollection;
 
   FileReader(String _filename, ArrayList<UserAccount> _UserCollection)
