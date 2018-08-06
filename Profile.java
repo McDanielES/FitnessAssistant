@@ -96,8 +96,7 @@ public class Profile
                 UserProgress Statistics = new UserProgress();
                 Statistics.setUser(currentUser);
                 Statistics.setNewWeight(newProfileWeight);
-
-                Statistics.updatedBMRStart();
+                Statistics.updatedWeightStats();
 
 
               } // End if User correctly confirmed weight
