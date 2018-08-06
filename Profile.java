@@ -27,7 +27,7 @@ public class Profile
     {
       System.out.print("\n-------------------------------------\n\t" + currentUser.getName() + "\'s Profile Menu"
         + "\n-------------------------------------\n\n\nPlease select an option:\n\n\t1.) Get " + currentUser.getName()
-        + "\'s Statistics\n\t2.) Update Weight / Recalculate BMR\n\t3.) Update User Fitness Profile Attributes"
+        + "\'s Progression\n\t2.) Update Weight / Recalculate BMR\n\t3.) Update User Fitness Profile Attributes"
         + "\n\t4.) Change Username / Password\n\n\t9.)  Log Out and Return to Main Menu\n\t10.) Exit Application"
         + "\n\nSelection: ");
       try
@@ -40,7 +40,7 @@ public class Profile
       }
 
       /***************************************************************************************|
-      |                       (1) "Get User's Statistics"                                     |
+      |                       (1) "Get User's Progression"                                     |
       |***************************************************************************************/
       if (input == 1)
       {
@@ -80,7 +80,7 @@ public class Profile
               else
               {
                 FitnessAssistant.clearScreen();
-                System.out.print("-----------------------------------\n\t" + currentUser.getName() + "\'s Statistics"
+                System.out.print("-----------------------------------\n\t" + currentUser.getName() + "\'s Progression"
                   + "\n-----------------------------------");
                 if (newProfileWeight > currentUser.getWeight())
                 {
@@ -96,8 +96,7 @@ public class Profile
                 UserProgress Statistics = new UserProgress();
                 Statistics.setUser(currentUser);
                 Statistics.setNewWeight(newProfileWeight);
-
-                Statistics.updatedBMRStart();
+                Statistics.updatedWeightStats();
 
 
               } // End if User correctly confirmed weight
