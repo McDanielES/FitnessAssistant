@@ -26,9 +26,9 @@ public class FitnessAssistant
       do
       {
         // Determine if user has previously established an account
-        System.out.print("\n_________________________________\nWelcome to the Fitness Assistant!\n\n\t-----------------\n"
-          + "\t|   Main Menu   |\n\t-----------------\n\n\nDo you have an existing account?\n\nType Y/n to login "
-          + "or QUIT to exit: ");
+        System.out.print(loginTitle());
+        System.out.print("\n\nDo you have an existing account?");
+        System.out.print("\n\n\t⎧  Type Y to login\nChoice  ⎨  Type N to create an account\n\t⎩  Type QUIT to exit\n\n   ►  Selection: ");
         char hasAccount;
         hasAccount = '0';
         Scanner userInput = new Scanner(System.in);
@@ -45,7 +45,10 @@ public class FitnessAssistant
           // Loop until valid user input is received
           while (hasAccountValidInput(hasAccount))
           {
-            System.out.print("\n\tInvalid entry. Please try again.\n\nType Y/n to login or QUIT to exit: ");
+            clearScreen();
+            System.out.print(loginTitle());
+            System.out.print("    _________________________________\n   | Invalid entry. Please try again |\n    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
+            System.out.print("\n\n\t⎧  Type Y to login\nChoice: ⎨  Type N to create an account\n\t⎩  Type QUIT to exit\n\n   ►  Selection: ");
             hasAccount = userInput.next().charAt(0);
           }
           Scanner userInputTemp = new Scanner(System.in);
@@ -266,12 +269,14 @@ public class FitnessAssistant
 
             System.out.print("Congratulations for being a member since " + newProfileCreate.getJoinedFullPrint()
               + "!\n\n\t________________________________________\n\tPlease return to the Main Menu to login.\n");
-            userContinue = continueProgram(userInput);
+            continueProgram();
           }
 
           // Opposite case where if the user has an account and input "y" in the beginning.
           else
           {
+            clearScreen();
+            System.out.print(loginTitle());
             System.out.print("\nPlease login below. If you cannot remember your username or\n     password, please type "
               + "HELP for the recovery menu.\n\n\t|| Username: ");
             String username = userInput.next();
@@ -287,7 +292,7 @@ public class FitnessAssistant
                 // Terminates program is no matching first name is ever found.
                 System.out.print("\n\nSorry, there are no accounts with the name " + username + ".\nPlease either confirm "
                   + "your spelling or create a new account.\n");
-                userContinue = continueProgram(userInput);
+                continueProgram();
               }
               else
               {
@@ -314,7 +319,7 @@ public class FitnessAssistant
                   System.out.print("\nSorry, there are no profiles named " + username + " who are reasonably close to "
                     + userAgeRecovery + " years old.\nPlease either contact the developer or create a new profile "
                     + "to get started.\n");
-                  userContinue = continueProgram(userInput);
+                  continueProgram();
                 }
                 else
                 {
@@ -358,13 +363,13 @@ public class FitnessAssistant
                     System.out.print("\t-----------------------------\n\t|| Your Username is: "
                       + UserCollection.get(userArrayListIndex).getUserID() + "\n\t|| Your Password is: "
                       + UserCollection.get(userArrayListIndex).getPassword() + "\n\t-----------------------------\n");
-                    userContinue = continueProgram(userInput);
+                    continueProgram();
                   }
                   else
                   {
                     System.out.print("\nSorry, there is no profile that matches that description.\nPlease either contact "
                       + "the developer or create a new account.\n");
-                    userContinue = continueProgram(userInput);
+                    continueProgram();
                   }
                 }   // End FindAgeInDatabase()
               }     // End FindNameInDatabase()
@@ -381,7 +386,7 @@ public class FitnessAssistant
               {
                 System.out.print("\nSorry, there is no profile with the username " + username + ".\nPlease confirm your "
                   + "spelling or type HELP to access Profile Recovery.\n\n");
-                userContinue = continueProgram(userInput);
+                continueProgram();
               }
               else
               {
@@ -404,7 +409,7 @@ public class FitnessAssistant
                 {
                   System.out.print("\t-------------------------------------------------------------------\n\nYou have "
                     + "repeatedly provided the incorrect password.\nPlease use the recovery menu to recover your account.\n");
-                  userContinue = continueProgram(userInput);
+                  continueProgram();
                 }
                 else // Password was valid
                 {
@@ -474,7 +479,8 @@ public class FitnessAssistant
     return false;
   } // End boolean FindAgeInDatabase()
 
-  public static int FindHeightInDatabase(String _userFirstName, int _userHeightInchesRecovery, ArrayList<UserAccount> _UserCollection)
+  public static int FindHeightInDatabase(String _userFirstName, int _userHeightInchesRecovery,
+      ArrayList<UserAccount> _UserCollection)
   {
     for (int i = 0; i < _UserCollection.size(); ++i)
     {
@@ -491,23 +497,16 @@ public class FitnessAssistant
       System.out.println();
   } // End void clearScreen()
 
-  public static boolean continueProgram(Scanner _userInput)
+  public static void continueProgram()
   {
-    String userChoice = "";
-    System.out.print("\n\t-------------------------------------------\n\tWould you like to go back to the main menu?\n"
-      + "\tType Y to go back or N to quit. Y/n: ");
-    userChoice = _userInput.next();
-    System.out.print("\t-------------------------------------------");
-    if (userChoice.charAt(0) == 'Y' || userChoice.charAt(0) == 'y')
+    System.out.print("____________________________________________\n       Press \"Enter\" key to Continue...\n");
+    try
     {
-      System.out.print("\n\n-------------------------------------------\n\tBack to the Main Menu");
-      timedClearScreen();
-      clearScreen();
-      return true;
+      System.in.read();
     }
-    System.out.print("\n\nThank you for using The Fitness Assistant!\nWritten by Eric S McDaniel, July-August 2018.\n\n");
-    return false;
-  } // End boolean continueProgram()
+    catch(Exception e){}
+    clearScreen();
+  } // End void continueProgram()
 
   public static void timedClearScreen()
   {
@@ -524,4 +523,9 @@ public class FitnessAssistant
       Thread.currentThread().interrupt();
     }
   } // End void timedClearScreen()
+  public static String loginTitle()
+  {
+    return ("\n_________________________________\nWelcome to the Fitness Assistant!\n\n\t------------------\n"
+      + "\t|   Login Menu   |\n\t------------------\n");
+  } // End void loginTitle()
 } // End class FitnessAssistant
