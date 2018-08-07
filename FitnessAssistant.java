@@ -34,6 +34,15 @@ public class FitnessAssistant
         Scanner userInput = new Scanner(System.in);
         hasAccount = userInput.next().charAt(0);
 
+        // Loop until valid user input is received
+        while (hasAccountValidInput(hasAccount))
+        {
+          clearScreen();
+          System.out.print(loginTitle());
+          System.out.print("    _________________________________\n   | Invalid entry. Please try again |\n    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
+          System.out.print("\n\n\t⎧  Type Y to login\nChoice: ⎨  Type N to create an account\n\t⎩  Type QUIT to exit\n\n   ►  Selection: ");
+          hasAccount = userInput.next().charAt(0);
+        }
         if (hasAccount == 'Q' || hasAccount == 'q')
         {
           userContinue = false;
@@ -42,24 +51,16 @@ public class FitnessAssistant
         }
         else
         {
-          // Loop until valid user input is received
-          while (hasAccountValidInput(hasAccount))
-          {
-            clearScreen();
-            System.out.print(loginTitle());
-            System.out.print("    _________________________________\n   | Invalid entry. Please try again |\n    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
-            System.out.print("\n\n\t⎧  Type Y to login\nChoice: ⎨  Type N to create an account\n\t⎩  Type QUIT to exit\n\n   ►  Selection: ");
-            hasAccount = userInput.next().charAt(0);
-          }
           Scanner userInputTemp = new Scanner(System.in);
 
           // Establishes account if none exists
           if (!hasAccountVerified(hasAccount))
           {
             UserAccount newProfileCreate = new UserAccount();
-
-            System.out.print("\nLet's establish an account for yourself.\nThis way I can calculate your measurables and "
-              + "track your progress.\n\tWhat is your name? ");
+            clearScreen();
+            System.out.print(loginTitle());
+            System.out.print("      ______________________\n     | New Profile Creation |\n      ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
+            System.out.print("\n\tWhat is your name? ");
             newProfileCreate.setName(userInput.next());
 
             // Get users' gender.
@@ -244,13 +245,14 @@ public class FitnessAssistant
               if (userPassword.equals(userPasswordConfirm))
                 validPassword = false;
               else
-                System.out.print("\n\t\t---------------------------\n\t\tPasswords did not match!\n\t\tPlease try again.\n"
+                System.out.print("\n\t\t __________________________\n\t\t| Passwords did not match! |\n\t\t| Please try again.        |\n\t\t ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"
                   + "\n\tProvide a password: ");
             } while (validPassword);
             newProfileCreate.setPassword(userPassword);
-
-            System.out.print("\t-------------------------------\n\t\t|| Username: " + newProfileCreate.getUserID() + " \n"
-              + "\t\t|| Password: " + newProfileCreate.getPassword() + "\n\t-------------------------------\n\n\n"
+            clearScreen();
+            System.out.print(loginTitle());
+            System.out.print("\n\t-------------------------------\n\t\t☑  Username: " + newProfileCreate.getUserID() + " \n"
+              + "\t\t☑  Password: " + newProfileCreate.getPassword() + "\n\t-------------------------------\n\n\n"
               + "Thanks for creating an account, " + newProfileCreate.getName() + "!\n");
 
             // Format the date
@@ -268,7 +270,7 @@ public class FitnessAssistant
             userDatabase.updateProfileDatabase();
 
             System.out.print("Congratulations for being a member since " + newProfileCreate.getJoinedFullPrint()
-              + "!\n\n\t________________________________________\n\tPlease return to the Main Menu to login.\n");
+              + "!\n\n\t _________________________________________\n\t| Please return to the Main Menu to login |\n\t ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n\n");
             continueProgram();
           }
 
@@ -278,13 +280,13 @@ public class FitnessAssistant
             clearScreen();
             System.out.print(loginTitle());
             System.out.print("\nPlease login below. If you cannot remember your username or\n     password, please type "
-              + "HELP for the recovery menu.\n\n\t|| Username: ");
+              + "HELP for the recovery menu.\n\n\t⊕  Username: ");
             String username = userInput.next();
             // boolean userContinue = "";
 
             if (username.equalsIgnoreCase("help"))
             {
-              System.out.print("\n\t   --------------------\n\t   | Profile Recovery |\n\t   --------------------\n\tWhat "
+              System.out.print("\n\t    __________________\n\t   | Profile Recovery |\n\t    ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n\tWhat "
                 + "is your first name? ");
               username = userInput.next();
               if (!FindNameInDatabase(username, UserCollection))
@@ -394,7 +396,7 @@ public class FitnessAssistant
                 boolean validPassword = false;
                 do
                 {
-                  System.out.print("\t|| Password: ");
+                  System.out.print("\t⊕  Password: ");
                   String password = userInput.next();
                   if (!password.equals(UserCollection.get(userProfileIndex).getPassword()))
                   {
@@ -446,7 +448,8 @@ public class FitnessAssistant
 
   public static boolean hasAccountValidInput(char _hasAccount)
   {
-    if (!(_hasAccount == 'y' || _hasAccount == 'Y' || _hasAccount == 'n' || _hasAccount == 'N' || _hasAccount == '0'))
+    if (!(_hasAccount == 'y' || _hasAccount == 'Y' || _hasAccount == 'n' || _hasAccount == 'N' || _hasAccount == '0' ||
+        _hasAccount == 'Q' || _hasAccount == 'q'))
       return true;
     return false;
   } // End hasAccountValidInput()
