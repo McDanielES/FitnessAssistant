@@ -24,7 +24,7 @@ public class UserProgress
     System.out.print("Percent Change:\t" + percentChange(currentUser.getWeight()) + "% "
       + direction(currentUser.getWeight()) + " from " + currentUser.getWeight() + " lbs.\n ↳ Since Start:\t"
       + percentChange(currentUser.getStartingWeight()) + "% " + direction(currentUser.getStartingWeight()) + " from "
-      + currentUser.getStartingWeight() + " lbs.\n\n---------------------------------------------\n");
+      + currentUser.getStartingWeight() + " lbs.\n\n—————————————————————————————————————————————\n");
 
     System.out.print("Average Daily Loss:\t" + dailyAverage(currentUser.getWeight()) + " lbs/day\n    ↳  Weekly Loss:\t"
       + weeklyAverage(currentUser.getWeight()) + " lbs/week\n\nSince Beginning:\t"
