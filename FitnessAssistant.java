@@ -394,7 +394,7 @@ public class FitnessAssistant
             do
             {
               System.out.print("\t⊕  Password: ");
-              String password = userInput.next();
+              String password = userInput.nextLine();
               if (!password.equals(UserCollection.get(userProfileIndex).getPassword()))
               {
                 --incorrectPasswordCounter;
