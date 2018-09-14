@@ -169,7 +169,7 @@ public class FitnessAssistant
               System.out.print("\t\t" + userGender + "? Sorry, please revise your input.\n");
             else
               validGender = true;
-            // If user entered M/m/F/f, then determin gender.
+            // If user entered M/m/F/f, then determine gender.
             if (userGender.charAt(0) == 'M' || userGender.charAt(0) == 'm')
               newProfileCreate.setGender(true);
             else
